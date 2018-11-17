@@ -1,0 +1,9 @@
+C:\Users\Roman\source\repos\ArkSaveManager\ArkSaveEditor\obj\Debug\netcoreapp2.1\ArkSaveEditor.csprojAssemblyReference.cache
+C:\Users\Roman\source\repos\ArkSaveManager\ArkSaveEditor\obj\Debug\netcoreapp2.1\ArkSaveEditor.csproj.CoreCompileInputs.cache
+C:\Users\Roman\source\repos\ArkSaveManager\ArkSaveEditor\obj\Debug\netcoreapp2.1\ArkSaveEditor.AssemblyInfoInputs.cache
+C:\Users\Roman\source\repos\ArkSaveManager\ArkSaveEditor\obj\Debug\netcoreapp2.1\ArkSaveEditor.AssemblyInfo.cs
+C:\Users\Roman\source\repos\ArkSaveManager\ArkSaveEditor\bin\Debug\netcoreapp2.1\ArkSaveEditor.deps.json
+C:\Users\Roman\source\repos\ArkSaveManager\ArkSaveEditor\bin\Debug\netcoreapp2.1\ArkSaveEditor.dll
+C:\Users\Roman\source\repos\ArkSaveManager\ArkSaveEditor\bin\Debug\netcoreapp2.1\ArkSaveEditor.pdb
+C:\Users\Roman\source\repos\ArkSaveManager\ArkSaveEditor\obj\Debug\netcoreapp2.1\ArkSaveEditor.dll
+C:\Users\Roman\source\repos\ArkSaveManager\ArkSaveEditor\obj\Debug\netcoreapp2.1\ArkSaveEditor.pdb
