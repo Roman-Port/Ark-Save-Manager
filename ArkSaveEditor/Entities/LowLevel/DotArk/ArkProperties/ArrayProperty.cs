@@ -18,8 +18,6 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
 
             //Read through each of the values in the array.
             ms.ms.Position += length;
-            Console.WriteLine(arrayType.classname);
-            Console.WriteLine(length);
         }
     }
 }

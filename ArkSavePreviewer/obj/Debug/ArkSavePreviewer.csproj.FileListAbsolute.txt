@@ -222,3 +222,4 @@ C:\Users\Roman\source\repos\ArkSaveEditor\ArkSavePreviewer\obj\Debug\ArkSavePrev
 C:\Users\Roman\source\repos\ArkSaveEditor\ArkSavePreviewer\obj\Debug\ArkSavePreviewer.csproj.CopyComplete
 C:\Users\Roman\source\repos\ArkSaveEditor\ArkSavePreviewer\obj\Debug\ArkSavePreviewer.exe
 C:\Users\Roman\source\repos\ArkSaveEditor\ArkSavePreviewer\obj\Debug\ArkSavePreviewer.pdb
+C:\Users\Roman\source\repos\ArkSaveEditor\ArkSavePreviewer\obj\Debug\ArkSavePreviewer.LoaderForm.resources

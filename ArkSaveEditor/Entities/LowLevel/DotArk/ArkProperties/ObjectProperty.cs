@@ -12,6 +12,9 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         public int objectId; //Only used if the above is ObjectPropertyType.TypeID
         public ArkClassName className; //Only used if the above is ObjectPropertyType.TypePath
 
+        [Newtonsoft.Json.JsonIgnoreAttribute]
+        public DotArkGameObject gameObjectRef; //Only exists if the above is ObjectPropertyType.TypeID
+
         public ObjectProperty(DotArkDeserializer d, int index, int length)
         {
             var ms = d.ms;
@@ -38,7 +41,11 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
             {
                 throw new Exception($"Unknown object ref length! Expected 4 or >= 8, but got {length} instead.");
             }
-
+            //If this is a type ID, I **THINK** this is a refrence to a GameObject
+            if(objectRefType == ObjectPropertyType.TypeID)
+            {
+                gameObjectRef = d.gameObjects[objectId];
+            }
         }
     }
 

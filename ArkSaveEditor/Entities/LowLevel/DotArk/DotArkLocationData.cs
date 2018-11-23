@@ -28,5 +28,13 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
 
             return l;
         }
+
+        public string ToString
+        {
+            get
+            {
+                return $"X:{x} Y:{y} Z:{z} Pitch:{pitch} Yaw:{yaw} Roll:{roll}";
+            }
+        }
     }
 }

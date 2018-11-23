@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,23 +17,28 @@ namespace ArkSavePreviewer
     {
         public ArkSaveEditor.Entities.LowLevel.DotArkFile ark;
 
+        public List<ArkSaveEditor.Entities.LowLevel.DotArk.DotArkGameObject> searchGameObjects = new List<ArkSaveEditor.Entities.LowLevel.DotArk.DotArkGameObject>();
+
         public ArkSaveEditor.Entities.LowLevel.DotArk.DotArkGameObject activeGameObject;
 
         public MainView()
         {
             InitializeComponent();
 
+            //Show loader
+            var loader = new LoaderForm();
+            loader.Show();
+            
+
             //First, load the Ark file.
             ark = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk();
 
             //Write all classes to the sidebar.
-            foreach(var g in ark.gameObjects)
-            {
-                string content = g.classname.classname + " - " + g.props.Count + " props ";
-                if (g.locationData != null)
-                    content += "- X:" + g.locationData.x.ToString() + " y:" + g.locationData.y.ToString() + " z:" + g.locationData.z.ToString();
-                gameObjectList.Items.Add(content);
-            }
+            Search("");
+
+            Thread.Sleep(300);
+            //Hidel oader
+            loader.Hide();
         }
 
         string ClassnameToString(ArkSaveEditor.Entities.LowLevel.ArkClassName cn)
@@ -42,8 +48,14 @@ namespace ArkSavePreviewer
 
         private void gameObjectList_SelectedValueChanged(object sender, EventArgs e)
         {
-            activeGameObject = ark.gameObjects[gameObjectList.SelectedIndex];
+            activeGameObject = searchGameObjects[gameObjectList.SelectedIndex];
             var pos = activeGameObject.locationData;
+            jumpToRefBtn.Enabled = false;
+            //Clear prop info
+            jsonData.Lines = new string[0];
+            tb_prop_name.Lines = new string[0];
+            tb_type.Lines = new string[0];
+            tb_size.Lines = new string[0];
 
             //Set UI elements
             tb_classname.Lines = new string[] { ClassnameToString(activeGameObject.classname) };
@@ -69,25 +81,83 @@ namespace ArkSavePreviewer
         private void gameObjectProps_SelectedIndexChanged(object sender, EventArgs e)
         {
             var prop = activeGameObject.props[gameObjectProps.SelectedIndex];
-
+            jumpToRefBtn.Enabled = false;
             //Set JSON data
             object content = prop.data;
-            if(prop.type.classname == "ByteProperty")
+            string json = JsonConvert.SerializeObject(content);
+            if (prop.type.classname == "ByteProperty")
             {
                 var p = (ByteProperty)prop;
                 if (p.isNormalByte)
-                    content = "0x" + BitConverter.ToString(new byte[] { p.byteValue });
+                    json = "0x" + BitConverter.ToString(new byte[] { p.byteValue });
                 else
-                    content = $"({ClassnameToString(p.enumName)}) {ClassnameToString(p.enumValue)}";
+                    json = $"({ClassnameToString(p.enumName)}) {ClassnameToString(p.enumValue)}";
+            }
+            if(prop.type.classname == "ObjectProperty")
+            {
+                var p = (ObjectProperty)prop;
+                if (p.objectRefType == ObjectPropertyType.TypeID)
+                    json = $"(ref to index {p.objectId})";
+                else if (p.objectRefType == ObjectPropertyType.TypePath)
+                    json = $"(ref to type path)\n{p.className.classname} {p.className.index}";
+                //Also enable the jump to btn
+                jumpToRefBtn.Enabled = true;
+                jumpToRefIndex = p.objectId;
             }
 
-            string json = JsonConvert.SerializeObject(content);
+            
             jsonData.Lines = json.Split('\n');
 
             //Set UI
             tb_prop_name.Lines = new string[] { ClassnameToString(prop.name) };
             tb_type.Lines = new string[] { ClassnameToString(prop.type) };
-            tb_size.Lines = new string[] { prop.size.ToString() };
+            tb_size.Lines = new string[] { prop.index.ToString() };
+        }
+
+        string lastSearch = null;
+
+        void Search(string query)
+        {
+            if (lastSearch == query)
+                return; //Stop
+            lastSearch = query;
+            //Clear GameObject list and search.
+            gameObjectList.Items.Clear();
+            searchGameObjects.Clear();
+            foreach (var g in ark.gameObjects)
+            {
+                if(g.classname.classname.ToLower().Contains(query.ToLower()) || query.Length == 0)
+                {
+                    //Add to list and UI.
+                    string content = g.classname.classname + " - " + g.props.Count + " props ";
+                    if (g.locationData != null)
+                        content += "- X:" + g.locationData.x.ToString() + " y:" + g.locationData.y.ToString() + " z:" + g.locationData.z.ToString();
+                    gameObjectList.Items.Add(content);
+
+                    searchGameObjects.Add(g);
+                }
+            }
+
+            resultsCounter.Text = $"{searchGameObjects.Count} results";
+        }
+
+        private void saerchBox_TextChanged(object sender, EventArgs e)
+        {
+            if(saerchBox.Lines.Length>=1)
+            {
+                if (saerchBox.Lines[0].Length > 3)
+                    Search(saerchBox.Lines[0]);
+            }
+        }
+
+        private int jumpToRefIndex;
+
+        private void jumpToRefBtn_Click(object sender, EventArgs e)
+        {
+            //Clear search
+            Search("");
+            //Jump to index
+            gameObjectList.SelectedIndex = jumpToRefIndex;
         }
     }
 }

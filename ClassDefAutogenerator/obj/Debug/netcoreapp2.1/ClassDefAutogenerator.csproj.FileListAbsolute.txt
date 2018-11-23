@@ -1,0 +1,11 @@
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.deps.json
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.runtimeconfig.json
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.runtimeconfig.dev.json
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.dll
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.csprojAssemblyReference.cache
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.csproj.CoreCompileInputs.cache
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.AssemblyInfoInputs.cache
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.AssemblyInfo.cs
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.pdb
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.dll
+C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.pdb
