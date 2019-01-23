@@ -31,7 +31,7 @@ namespace ArkSavePreviewer
             
 
             //First, load the Ark file.
-            ark = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk();
+            ark = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk(@"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Saved\ExtinctionSavedArksLocal\Extinction.ark");
 
             //Write all classes to the sidebar.
             Search("");
@@ -43,7 +43,7 @@ namespace ArkSavePreviewer
 
         string ClassnameToString(ArkSaveEditor.Entities.LowLevel.ArkClassName cn)
         {
-            return $"{cn.classname}[{cn.index}]";
+            return $"{ cn.classname}[{cn.index}]";
         }
 
         private void gameObjectList_SelectedValueChanged(object sender, EventArgs e)
@@ -104,6 +104,10 @@ namespace ArkSavePreviewer
                 jumpToRefBtn.Enabled = true;
                 jumpToRefIndex = p.objectId;
             }
+            if(prop.type.classname == "ArrayProperty")
+            {
+                json = JsonConvert.SerializeObject(prop);
+            }
 
             
             jsonData.Lines = json.Split('\n');
@@ -158,6 +162,12 @@ namespace ArkSavePreviewer
             Search("");
             //Jump to index
             gameObjectList.SelectedIndex = jumpToRefIndex;
+        }
+
+        private void get_tp_cmd_Click(object sender, EventArgs e)
+        {
+            string p = $"admincheat setplayerpos {activeGameObject.locationData.x} {activeGameObject.locationData.y} {activeGameObject.locationData.z}";
+            Clipboard.SetText(p);
         }
     }
 }

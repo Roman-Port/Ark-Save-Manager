@@ -12,17 +12,18 @@ namespace ClassDefAutogenerator
         static void Main(string[] args)
         {
             Console.WriteLine("Fetching dinos...");
-            GrabAndSaveEnum("https://ark.gamepedia.com/Creatures", "cargo-creature-table", "DinoClasses", 10, 0);
+            //GrabAndSaveEnum("https://ark.gamepedia.com/Creatures", "cargo-creature-table", "DinoClasses", 10, 0);
+            DinoTool.RunDinoTool(@"C:\Users\Roman\Desktop\Ark Classnames\");
 
-
-
+            Console.ReadLine();
         }
 
         static void GrabAndSaveEnum(string url, string nodeName, string enumName, int col1, int col2)
         {
             string[][] dinoTable = GrabTableFromWeb(url, nodeName);
             string dinoData = GenerateEnumFromHtmlTable(enumName, dinoTable, col1, col2);
-            File.WriteAllText(saveLocation + enumName + ".cs", dinoData);
+            Console.WriteLine(dinoTable[0][0]);
+            //File.WriteAllText(saveLocation + enumName + ".cs", dinoData);
         }
 
         static string[][] GrabTableFromWeb(string url, string tableClassName)

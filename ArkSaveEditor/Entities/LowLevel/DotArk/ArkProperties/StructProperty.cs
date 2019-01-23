@@ -18,7 +18,8 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
             structType = ms.ReadArkClassname(d);
 
             //Read in the struct
-            data = DotArkStruct.ReadFromFile(d, structType);
+            structData = DotArkStruct.ReadFromFile(d, structType);
+            data = structData;
         }
     }
 }

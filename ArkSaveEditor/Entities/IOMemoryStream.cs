@@ -14,6 +14,18 @@ namespace ArkSaveEditor.Entities
 
         public MemoryStream ms = new MemoryStream();
 
+        public long position
+        {
+            get
+            {
+                return ms.Position;
+            }
+            set
+            {
+                ms.Position = value;
+            }
+        }
+
         public IOMemoryStream(MemoryStream ms, bool is_little_endian)
         {
             this.ms = ms;
@@ -72,7 +84,7 @@ namespace ArkSaveEditor.Entities
             return BitConverter.ToDouble(PrivateReadBytes(8), 0);
         }
 
-        public bool ReadBool()
+        public bool ReadIntBool()
         {
             int data = ReadInt();
             //This is really bad, Wildcard....
@@ -81,16 +93,28 @@ namespace ArkSaveEditor.Entities
             return data == 1;
         }
 
-        public string ReadUEString()
+        public bool ReadByteBool()
+        {
+            return ReadByte() != 0x00;
+        }
+
+        public string ReadUEString(int maxLen = int.MaxValue)
         {
             //Read length
             int length = this.ReadInt();
             if (length == 0)
                 return "";
+            //Validate length
+            if (length > maxLen)
+                throw new Exception("Failed to read null-terminated string; Length from file exceeded maximum length requested.");
+            if (length < 0)
+                throw new Exception("Failed to read null-terminated string; Length was less than 0.");
             //Read this many bytes.
             byte[] buf = ReadBytes(length - 1);
             //Read null byte, but discard
-            ms.Position += 1;
+            byte nullByte = ReadByte();
+            if (nullByte != 0x00)
+                throw new Exception("Failed to read null-terminated string; Terminator was not null!");
             //Convert to string
             return Encoding.UTF8.GetString(buf);
         }

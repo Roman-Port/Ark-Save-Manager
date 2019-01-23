@@ -1,5 +1,7 @@
-﻿using ArkSaveEditor.Entities.LowLevel.DotArk;
+﻿using ArkSaveEditor.ArkEntries;
+using ArkSaveEditor.Entities.LowLevel.DotArk;
 using ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties;
+using ArkSaveEditor.Tools;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -58,6 +60,11 @@ namespace ArkSaveEditor.World.WorldTypes
         /// </summary>
         public int level;
 
+        /// <summary>
+        /// Some global dino data
+        /// </summary>
+        public ArkDinoEntry dino_entry;
+
         /* TAMED ONLY */
 
         /// <summary>
@@ -79,6 +86,54 @@ namespace ArkSaveEditor.World.WorldTypes
         /// The number of experience this dinosaur has. Only exists on tamed dinosaurs.
         /// </summary>
         public float experience;
+
+        /// <summary>
+        /// Get the items in this dino's inventory.
+        /// </summary>
+        public List<ArkPrimalItem> GetInventoryItems()
+        {
+            //Get the inventory component from our props. This is ref
+            var inventoryComponent = ((ObjectProperty)GetPropertiesByName("MyInventoryComponent")[0]).gameObjectRef;
+
+            //Get the items
+            var inventoryItems = ((ArrayProperty<ObjectProperty>)inventoryComponent.GetPropsByName("InventoryItems")[0]).items;
+
+            //Get the referenced items
+            List<ArkPrimalItem> stacks = new List<ArkPrimalItem>();
+            foreach (var o in inventoryItems)
+            {
+                stacks.Add(new ArkPrimalItem(world, o.gameObjectRef));
+            }
+            return stacks;
+        }
+
+        /// <summary>
+        /// Calculates the max stats for a dinosaur. REQUIRES YOU TO RUN ArkSaveEditor.ArkImports.ImportContent() BEFORE THIS!
+        /// </summary>
+        /// <returns></returns>
+        public ArkDinosaurStats GetMaxStats()
+        {
+            ArkDinoEntry d = dino_entry;
+            ArkWorldSettings settings = ArkImports.world_settings;
+            float tamingEffectiveness = 0.5f;
+            float imprintingBonus = 0f;
+
+            if (d == null)
+                return null;
+
+            return new ArkDinosaurStats
+            {
+                health = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Health, baseLevelupsApplied.health, tamingEffectiveness, tamedLevelupsApplied.health, imprintingBonus, settings),
+                stamina = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Stamina, baseLevelupsApplied.stamina, tamingEffectiveness, tamedLevelupsApplied.stamina, imprintingBonus, settings),
+                unknown1 = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Torpidity, baseLevelupsApplied.unknown1, tamingEffectiveness, tamedLevelupsApplied.unknown1, imprintingBonus, settings),
+                oxygen = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Oxygen, baseLevelupsApplied.oxygen, tamingEffectiveness, tamedLevelupsApplied.oxygen, imprintingBonus, settings),
+                food = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Food, baseLevelupsApplied.food, tamingEffectiveness, tamedLevelupsApplied.food, imprintingBonus, settings),
+                water = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Water, baseLevelupsApplied.water, tamingEffectiveness, tamedLevelupsApplied.water, imprintingBonus, settings),
+                inventoryWeight = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Weight, baseLevelupsApplied.inventoryWeight, tamingEffectiveness, tamedLevelupsApplied.inventoryWeight, imprintingBonus, settings),
+                meleeDamageMult = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.MeleeDamage, baseLevelupsApplied.meleeDamageMult, tamingEffectiveness, tamedLevelupsApplied.meleeDamageMult, imprintingBonus, settings),
+                movementSpeedMult = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Speed, baseLevelupsApplied.movementSpeedMult, tamingEffectiveness, tamedLevelupsApplied.movementSpeedMult, imprintingBonus, settings),
+            };
+        }
 
         public ArkDinosaur(ArkWorld world, DotArkGameObject orig) : base(world, orig)
         {
@@ -119,8 +174,15 @@ namespace ArkSaveEditor.World.WorldTypes
                 tamedLevelupsApplied = ArkDinosaurStats.ReadStats(statusComponent, "NumberOfLevelUpPointsAppliedTamed", true);
                 if(statusComponent.CheckIfValueExists("ExtraCharacterLevel"))
                     level += statusComponent.GetUInt16Property("ExtraCharacterLevel");
-                experience = statusComponent.GetFloatProperty("ExperiencePoints");
+                if (statusComponent.HasProperty("ExperiencePoints"))
+                    experience = statusComponent.GetFloatProperty("ExperiencePoints");
+                else
+                    experience = 0;
             }
+
+            //Get the dino entry data
+            dino_entry = ArkImports.GetDinoDataByClassname(classname.classname);
+
             isInit = true;
 
             

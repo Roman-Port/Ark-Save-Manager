@@ -16,7 +16,8 @@ namespace ArkSaveEditor.World
         /// <summary>
         /// The world this object belongs to.
         /// </summary>
-        private readonly ArkWorld world;
+        [Newtonsoft.Json.JsonIgnoreAttribute]
+        public readonly ArkWorld world;
 
         public HighLevelArkGameObjectRef(ArkWorld world, DotArkGameObject source)
         {
@@ -130,6 +131,7 @@ namespace ArkSaveEditor.World
         /// <summary>
         /// Raw access to the properties.
         /// </summary>
+        //[Newtonsoft.Json.JsonIgnoreAttribute]
         public List<DotArkProperty> rawProperties
         {
             get
@@ -203,6 +205,12 @@ namespace ArkSaveEditor.World
         public string GetStringProperty(string name)
         {
             return (string)GetSingleProperty(name).data;
+        }
+
+        public bool HasProperty(string name)
+        {
+            var arr = source.props.Where(x => x.name.classname == name).ToArray();
+            return arr.Length != 0;
         }
     }
 }

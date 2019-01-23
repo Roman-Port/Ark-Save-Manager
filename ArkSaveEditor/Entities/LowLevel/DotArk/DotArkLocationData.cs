@@ -29,6 +29,18 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
             return l;
         }
 
+        public DotArkLocationData()
+        {
+
+        }
+
+        public DotArkLocationData(float x, float y, float z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
         public string ToString
         {
             get

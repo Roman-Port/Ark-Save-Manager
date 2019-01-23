@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties;
 
 namespace ArkSaveEditor.Entities.LowLevel.DotArk
 {
@@ -21,6 +23,51 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
         //public Dictionary<string, DotArkProperty> props;
         public List<DotArkProperty> props;
 
+        public DotArkProperty[] GetPropsByName(string name)
+        {
+            return props.Where(x => x.name.classname == name).ToArray();
+        }
+
+        public T[] GetPropsByName<T>(string name)
+        {
+            var foundProps = props.Where(x => x.name.classname == name).ToArray();
+            //Cast all of these
+            T[] output = new T[foundProps.Length];
+            for (int i = 0; i < foundProps.Length; i++)
+                output[i] = (T)Convert.ChangeType(foundProps[i], typeof(T));
+            return output;
+        }
+
+        public DotArkProperty GetPropByName(string name)
+        {
+            var p = GetPropsByName(name);
+            if (p.Length != 1)
+                return null;
+            return p[0];
+        }
+
+        public T GetPropByName<T>(string name)
+        {
+            var p = GetPropsByName<T>(name);
+            if (p.Length != 1)
+                return default(T);
+            return p[0];
+        }
+
+        public bool PropExistsName(string name)
+        {
+            return GetPropsByName(name).Length >= 1;
+        }
+
+        public bool GetBoolPropByName(string name)
+        {
+            //If this prop does not exist, return false
+            if (!PropExistsName(name))
+                return false;
+            else
+                return (bool)GetPropByName<BoolProperty>(name).data;
+        }
+
         public static DotArkGameObject ReadBaseFromFile(DotArkDeserializer ds)
         {
             //Read from the initial ArkGameObject table.
@@ -29,17 +76,17 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
 
             go.guid = new Guid(ms.ReadBytes(16));
             go.classname = ms.ReadArkClassname(ds);
-            go.isItem = ms.ReadBool();
+            go.isItem = ms.ReadIntBool();
             //Read the name array. Start by reading the integer length.
             int nameArrayLength = ms.ReadInt();
             go.names = new List<ArkClassName>();
             for (int i = 0; i < nameArrayLength; i++)
                 go.names.Add(ms.ReadArkClassname(ds));
             //Read some unknown data
-            go.unknownData1 = ms.ReadBool();
+            go.unknownData1 = ms.ReadIntBool();
             go.unknownData2 = ms.ReadInt();
             //Read location data boolean
-            bool locationDataExists = ms.ReadBool();
+            bool locationDataExists = ms.ReadIntBool();
             if (locationDataExists)
                 go.locationData = ms.ReadLocationData(ds);
             //Read the offset to the property data

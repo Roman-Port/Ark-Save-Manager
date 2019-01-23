@@ -90,7 +90,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
                     prop = new StructProperty(d, index, size); 
                     break;
                 case "ArrayProperty":
-                    prop = new ArrayProperty(d, index, size); //UNFINISHED
+                    prop = DotArkArray.ReadArray(d, index, size); //UNFINISHED
                     break;
                 case "TextProperty":
                     prop = new TextProperty(d, index, size);

@@ -55,6 +55,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.jumpToRefBtn = new System.Windows.Forms.Button();
+            this.get_tp_cmd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gameObjectList
@@ -74,9 +75,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gameObjectProps.FormattingEnabled = true;
-            this.gameObjectProps.Location = new System.Drawing.Point(469, 261);
+            this.gameObjectProps.Location = new System.Drawing.Point(469, 287);
             this.gameObjectProps.Name = "gameObjectProps";
-            this.gameObjectProps.Size = new System.Drawing.Size(362, 290);
+            this.gameObjectProps.Size = new System.Drawing.Size(362, 264);
             this.gameObjectProps.TabIndex = 1;
             this.gameObjectProps.SelectedIndexChanged += new System.EventHandler(this.gameObjectProps_SelectedIndexChanged);
             // 
@@ -320,11 +321,22 @@
             this.jumpToRefBtn.UseVisualStyleBackColor = true;
             this.jumpToRefBtn.Click += new System.EventHandler(this.jumpToRefBtn_Click);
             // 
+            // get_tp_cmd
+            // 
+            this.get_tp_cmd.Location = new System.Drawing.Point(686, 258);
+            this.get_tp_cmd.Name = "get_tp_cmd";
+            this.get_tp_cmd.Size = new System.Drawing.Size(145, 23);
+            this.get_tp_cmd.TabIndex = 26;
+            this.get_tp_cmd.Text = "Get TP Command";
+            this.get_tp_cmd.UseVisualStyleBackColor = true;
+            this.get_tp_cmd.Click += new System.EventHandler(this.get_tp_cmd_Click);
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1278, 563);
+            this.Controls.Add(this.get_tp_cmd);
             this.Controls.Add(this.jumpToRefBtn);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.button3);
@@ -387,6 +399,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button jumpToRefBtn;
+        private System.Windows.Forms.Button get_tp_cmd;
     }
 }
 

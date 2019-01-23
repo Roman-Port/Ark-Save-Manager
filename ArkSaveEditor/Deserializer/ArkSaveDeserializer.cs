@@ -11,14 +11,14 @@ namespace ArkSaveEditor.Deserializer
     /// </summary>
     public static class ArkSaveDeserializer
     {
-        public static DotArkFile OpenDotArk()
+        public static DotArkFile OpenDotArk(string path = @"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Saved\SavedArks\Extinction.ark")
         {
             //First, read in the Ark file
             DotArk.DotArkDeserializer dotArkDs;
             using (MemoryStream ms = new MemoryStream())
             {
                 //Copy from disk
-                using (FileStream fs = new FileStream(@"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Saved\SavedArks\Extinction.ark", FileMode.Open))
+                using (FileStream fs = new FileStream(path, FileMode.Open))
                     fs.CopyTo(ms);
                 //Rewind
                 ms.Position = 0;

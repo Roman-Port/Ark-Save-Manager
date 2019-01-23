@@ -44,7 +44,8 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
             //If this is a type ID, I **THINK** this is a refrence to a GameObject
             if(objectRefType == ObjectPropertyType.TypeID)
             {
-                gameObjectRef = d.gameObjects[objectId];
+                if(objectId != -1)
+                    gameObjectRef = d.gameObjects[objectId];
             }
         }
     }
