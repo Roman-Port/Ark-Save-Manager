@@ -31,7 +31,7 @@ namespace ArkSavePreviewer
             
 
             //First, load the Ark file.
-            ark = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk(@"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Saved\ExtinctionSavedArksLocal\Extinction.ark");
+            ark = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk(@"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Saved\SavedArks\Extinction.ark");
 
             //Write all classes to the sidebar.
             Search("");
