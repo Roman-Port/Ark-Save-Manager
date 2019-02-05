@@ -78,6 +78,11 @@ namespace ArkSaveEditor.World.WorldTypes
         public string tamerName;
 
         /// <summary>
+        /// The ID of the tamed tribe
+        /// </summary>
+        public int tribeId;
+
+        /// <summary>
         /// The number of levelups applied after spawn time. Does not include base levels.
         /// </summary>
         public ArkDinosaurStats tamedLevelupsApplied;
@@ -86,6 +91,11 @@ namespace ArkSaveEditor.World.WorldTypes
         /// The number of experience this dinosaur has. Only exists on tamed dinosaurs.
         /// </summary>
         public float experience;
+
+        /* Age */
+        public float babyAge;
+        public bool isBaby;
+        public double nextImprintTime;
 
         /// <summary>
         /// Get the items in this dino's inventory.
@@ -141,7 +151,7 @@ namespace ArkSaveEditor.World.WorldTypes
             //Get the other components of this dinosaur.
             HighLevelArkGameObjectRef statusComponent = GetGameObjectRef("MyCharacterStatusComponent");
             //Check if this dinosaur is tamed.
-            isTamed = CheckIfValueExists("TamedName") && CheckIfValueExists("TamerString");
+            isTamed = CheckIfValueExists("TamedName") && CheckIfValueExists("TribeName") && CheckIfValueExists("TargetingTeam");
             //Grab the values that will exist on both tamed and untamed dinosaurs.
             isFemale = GetBooleanProperty("bIsFemale");
             //Convert the colors into a byte array and hex.
@@ -170,7 +180,8 @@ namespace ArkSaveEditor.World.WorldTypes
             if (isTamed)
             {
                 tamedName = GetStringProperty("TamedName");
-                tamerName = GetStringProperty("TamerString");
+                tribeId = GetInt32Property("TargetingTeam");
+                tamerName = GetStringProperty("TribeName");
                 tamedLevelupsApplied = ArkDinosaurStats.ReadStats(statusComponent, "NumberOfLevelUpPointsAppliedTamed", true);
                 if(statusComponent.CheckIfValueExists("ExtraCharacterLevel"))
                     level += statusComponent.GetUInt16Property("ExtraCharacterLevel");
@@ -178,6 +189,14 @@ namespace ArkSaveEditor.World.WorldTypes
                     experience = statusComponent.GetFloatProperty("ExperiencePoints");
                 else
                     experience = 0;
+
+                isBaby = GetBooleanProperty("bIsBaby");
+                if (isBaby)
+                {
+                    babyAge = GetFloatProperty("BabyAge");
+                    nextImprintTime = GetDoubleProperty("BabyNextCuddleTime");
+                }
+                
             }
 
             //Get the dino entry data

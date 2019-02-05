@@ -202,6 +202,11 @@ namespace ArkSaveEditor.World
             return (float)GetSingleProperty(name).data;
         }
 
+        public double GetDoubleProperty(string name)
+        {
+            return (double)GetSingleProperty(name).data;
+        }
+
         public string GetStringProperty(string name)
         {
             return (string)GetSingleProperty(name).data;

@@ -16,3 +16,12 @@ C:\Users\Roman\source\repos\ArkSaveEditor\ArkSaveEditor\obj\Debug\netstandard2.0
 C:\Users\Roman\source\repos\ArkSaveEditor\ArkSaveEditor\obj\Debug\netstandard2.0\ArkSaveEditor.AssemblyInfo.cs
 C:\Users\Roman\source\repos\ArkSaveEditor\ArkSaveEditor\obj\Debug\netstandard2.0\ArkSaveEditor.dll
 C:\Users\Roman\source\repos\ArkSaveEditor\ArkSaveEditor\obj\Debug\netstandard2.0\ArkSaveEditor.pdb
+C:\Users\Roman\source\repos\ArkWebMap\backend\Ark-Save-Manager\ArkSaveEditor\bin\Debug\netstandard2.0\ArkSaveEditor.deps.json
+C:\Users\Roman\source\repos\ArkWebMap\backend\Ark-Save-Manager\ArkSaveEditor\bin\Debug\netstandard2.0\ArkSaveEditor.dll
+C:\Users\Roman\source\repos\ArkWebMap\backend\Ark-Save-Manager\ArkSaveEditor\bin\Debug\netstandard2.0\ArkSaveEditor.pdb
+C:\Users\Roman\source\repos\ArkWebMap\backend\Ark-Save-Manager\ArkSaveEditor\obj\Debug\netstandard2.0\ArkSaveEditor.csprojAssemblyReference.cache
+C:\Users\Roman\source\repos\ArkWebMap\backend\Ark-Save-Manager\ArkSaveEditor\obj\Debug\netstandard2.0\ArkSaveEditor.csproj.CoreCompileInputs.cache
+C:\Users\Roman\source\repos\ArkWebMap\backend\Ark-Save-Manager\ArkSaveEditor\obj\Debug\netstandard2.0\ArkSaveEditor.AssemblyInfoInputs.cache
+C:\Users\Roman\source\repos\ArkWebMap\backend\Ark-Save-Manager\ArkSaveEditor\obj\Debug\netstandard2.0\ArkSaveEditor.AssemblyInfo.cs
+C:\Users\Roman\source\repos\ArkWebMap\backend\Ark-Save-Manager\ArkSaveEditor\obj\Debug\netstandard2.0\ArkSaveEditor.dll
+C:\Users\Roman\source\repos\ArkWebMap\backend\Ark-Save-Manager\ArkSaveEditor\obj\Debug\netstandard2.0\ArkSaveEditor.pdb
