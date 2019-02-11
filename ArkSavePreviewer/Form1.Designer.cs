@@ -56,6 +56,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.jumpToRefBtn = new System.Windows.Forms.Button();
             this.get_tp_cmd = new System.Windows.Forms.Button();
+            this.filePositionEntry = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // gameObjectList
@@ -190,10 +192,10 @@
             // 
             this.jsonData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.jsonData.Location = new System.Drawing.Point(837, 201);
+            this.jsonData.Location = new System.Drawing.Point(837, 228);
             this.jsonData.Multiline = true;
             this.jsonData.Name = "jsonData";
-            this.jsonData.Size = new System.Drawing.Size(429, 350);
+            this.jsonData.Size = new System.Drawing.Size(429, 323);
             this.jsonData.TabIndex = 12;
             // 
             // tb_prop_name
@@ -313,7 +315,7 @@
             // 
             this.jumpToRefBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.jumpToRefBtn.Enabled = false;
-            this.jumpToRefBtn.Location = new System.Drawing.Point(1142, 172);
+            this.jumpToRefBtn.Location = new System.Drawing.Point(1142, 170);
             this.jumpToRefBtn.Name = "jumpToRefBtn";
             this.jumpToRefBtn.Size = new System.Drawing.Size(124, 23);
             this.jumpToRefBtn.TabIndex = 25;
@@ -331,11 +333,33 @@
             this.get_tp_cmd.UseVisualStyleBackColor = true;
             this.get_tp_cmd.Click += new System.EventHandler(this.get_tp_cmd_Click);
             // 
+            // filePositionEntry
+            // 
+            this.filePositionEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.filePositionEntry.Location = new System.Drawing.Point(837, 204);
+            this.filePositionEntry.Name = "filePositionEntry";
+            this.filePositionEntry.ReadOnly = true;
+            this.filePositionEntry.Size = new System.Drawing.Size(429, 20);
+            this.filePositionEntry.TabIndex = 28;
+            this.filePositionEntry.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(838, 188);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(74, 13);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "Position in File";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1278, 563);
+            this.Controls.Add(this.filePositionEntry);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.get_tp_cmd);
             this.Controls.Add(this.jumpToRefBtn);
             this.Controls.Add(this.label9);
@@ -400,6 +424,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button jumpToRefBtn;
         private System.Windows.Forms.Button get_tp_cmd;
+        private System.Windows.Forms.TextBox filePositionEntry;
+        private System.Windows.Forms.Label label10;
     }
 }
 

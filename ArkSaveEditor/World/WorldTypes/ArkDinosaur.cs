@@ -102,6 +102,10 @@ namespace ArkSaveEditor.World.WorldTypes
         /// </summary>
         public List<ArkPrimalItem> GetInventoryItems()
         {
+            //If we don't have an inventory compnent, return empty list
+            if (!HasProperty("MyInventoryComponent"))
+                return new List<ArkPrimalItem>();
+            
             //Get the inventory component from our props. This is ref
             var inventoryComponent = ((ObjectProperty)GetPropertiesByName("MyInventoryComponent")[0]).gameObjectRef;
 
@@ -194,7 +198,9 @@ namespace ArkSaveEditor.World.WorldTypes
                 if (isBaby)
                 {
                     babyAge = GetFloatProperty("BabyAge");
-                    nextImprintTime = GetDoubleProperty("BabyNextCuddleTime");
+                    nextImprintTime = -1;
+                    if(HasProperty("BabyNextCuddleTime"))
+                        GetDoubleProperty("BabyNextCuddleTime");
                 }
                 
             }

@@ -116,6 +116,7 @@ namespace ArkSavePreviewer
             tb_prop_name.Lines = new string[] { ClassnameToString(prop.name) };
             tb_type.Lines = new string[] { ClassnameToString(prop.type) };
             tb_size.Lines = new string[] { prop.index.ToString() };
+            filePositionEntry.Lines = new string[] { prop.filePosition.ToString() };
         }
 
         string lastSearch = null;
