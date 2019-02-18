@@ -47,5 +47,21 @@ namespace ArkSaveEditor.ArkEntries
         public float increasePerQuanity_Water { get; set; }
 
         public float increasePerQuanity_Stamina { get; set; }
+
+        public Dictionary<string, ArkItemEntryAddStatus> addStatusValues;
+    }
+
+    public class ArkItemEntryAddStatus
+    {
+        public string statusValueType { get; set; }
+        public double baseAmountToAdd { get; set; }
+        public bool percentOfMaxStatusValue { get; set; }
+        public bool percentOfCurrentStatusValue { get; set; }
+        public bool useItemQuality { get; set; }
+        public bool addOverTime { get; set; }
+        public bool setValue { get; set; }
+        public bool setAdditionalValue { get; set; }
+        public double addOverTimeSpeed { get; set; }
+        public double itemQualityAddValueMultiplier { get; set; }
     }
 }
