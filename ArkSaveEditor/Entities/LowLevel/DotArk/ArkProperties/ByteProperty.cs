@@ -29,6 +29,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
             isNormalByte = enumName.IsNone();
 
             //If that type is a None, this is not an enum. If it is, this is an enum. Read the name.
+            dataFilePosition = ms.position;
             if (isNormalByte)
                 byteValue = ms.ReadByte();
             else

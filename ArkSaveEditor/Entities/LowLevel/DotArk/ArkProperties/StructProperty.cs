@@ -18,6 +18,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
             structType = ms.ReadArkClassname(d);
 
             //Read in the struct
+            dataFilePosition = ms.position;
             structData = DotArkStruct.ReadFromFile(d, structType);
             data = structData;
         }

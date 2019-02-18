@@ -220,11 +220,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Roman\\source\\repos\\ArkWebMap\\backend\\Ark-Save-Manager\\ArkSaveEditor\\ArkSaveEditor.csproj",
+      "projectUniqueName": "C:\\Users\\Roman\\source\\repos\\ArkSaveEditor\\ArkSaveEditor\\ArkSaveEditor.csproj",
       "projectName": "ArkSaveEditor",
-      "projectPath": "C:\\Users\\Roman\\source\\repos\\ArkWebMap\\backend\\Ark-Save-Manager\\ArkSaveEditor\\ArkSaveEditor.csproj",
+      "projectPath": "C:\\Users\\Roman\\source\\repos\\ArkSaveEditor\\ArkSaveEditor\\ArkSaveEditor.csproj",
       "packagesPath": "C:\\Users\\Roman\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Roman\\source\\repos\\ArkWebMap\\backend\\Ark-Save-Manager\\ArkSaveEditor\\obj\\",
+      "outputPath": "C:\\Users\\Roman\\source\\repos\\ArkSaveEditor\\ArkSaveEditor\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

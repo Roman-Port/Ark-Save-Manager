@@ -31,7 +31,7 @@ namespace ArkSavePreviewer
             
 
             //First, load the Ark file.
-            ark = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk(@"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Saved\SavedArks\Extinction.ark");
+            ark = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk(@"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Saved\SavedArks\ExtinctionSavedArksLocal.ark");
 
             //Write all classes to the sidebar.
             Search("");
@@ -116,7 +116,7 @@ namespace ArkSavePreviewer
             tb_prop_name.Lines = new string[] { ClassnameToString(prop.name) };
             tb_type.Lines = new string[] { ClassnameToString(prop.type) };
             tb_size.Lines = new string[] { prop.index.ToString() };
-            filePositionEntry.Lines = new string[] { prop.filePosition.ToString() };
+            filePositionEntry.Lines = new string[] { prop.dataFilePosition.ToString() };
         }
 
         string lastSearch = null;

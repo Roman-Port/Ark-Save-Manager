@@ -10,7 +10,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         public TextProperty(DotArkDeserializer d, int index, int length)
         {
             var ms = d.ms;
-
+            dataFilePosition = ms.position;
             this.data = Convert.ToBase64String(ms.ReadBytes(length));
         }
     }

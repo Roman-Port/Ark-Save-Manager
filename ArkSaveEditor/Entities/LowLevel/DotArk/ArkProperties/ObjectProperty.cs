@@ -23,6 +23,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
             if(length == 4)
             {
                 objectRefType = ObjectPropertyType.TypeID;
+                dataFilePosition = ms.position;
                 objectId = ms.ReadInt();
             } else if (length >= 8)
             {
@@ -32,6 +33,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
                     throw new Exception($"Unknown ref type! Expected 0 or 1, but got {type} instead!");
                 //Convert this to our enum
                 objectRefType = (ObjectPropertyType)type;
+                dataFilePosition = ms.position;
                 //Depending on the type, read it in.
                 if (objectRefType == ObjectPropertyType.TypeID)
                     objectId = ms.ReadInt();
@@ -39,6 +41,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
                     className = ms.ReadArkClassname(d);
             } else
             {
+                dataFilePosition = ms.position;
                 throw new Exception($"Unknown object ref length! Expected 4 or >= 8, but got {length} instead.");
             }
             //If this is a type ID, I **THINK** this is a refrence to a GameObject

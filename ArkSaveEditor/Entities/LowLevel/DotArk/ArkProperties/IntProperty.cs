@@ -10,7 +10,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         public IntProperty(DotArkDeserializer d, int index, int length)
         {
             var ms = d.ms;
-
+            dataFilePosition = ms.position;
             this.data = ms.ReadInt();
         }
     }

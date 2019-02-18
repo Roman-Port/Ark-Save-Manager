@@ -14,6 +14,11 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
         public int index;
         public int size;
 
+        /// <summary>
+        /// Beginning of the content, not the prop
+        /// </summary>
+        public long dataFilePosition;
+
         public object data;
 
         public static DotArkProperty ReadPropertyFromDisk(DotArkDeserializer d)
