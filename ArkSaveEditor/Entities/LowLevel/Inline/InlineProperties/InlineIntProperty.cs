@@ -6,11 +6,11 @@ namespace ArkSaveEditor.Entities.LowLevel.Inline.InlineProperties
 {
     public class InlineIntProperty : InlineProperty
     {
-        public int data;
+        public int value;
 
         public InlineIntProperty(IOMemoryStream ms) : base(ms)
         {
-            data = ms.ReadInt();
+            value = ms.ReadInt();
         }
     }
 }

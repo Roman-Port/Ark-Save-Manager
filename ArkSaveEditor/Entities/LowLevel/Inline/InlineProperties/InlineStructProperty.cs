@@ -8,50 +8,50 @@ namespace ArkSaveEditor.Entities.LowLevel.Inline.InlineProperties
 {
     public class InlineStructProperty : InlineProperty
     {
-        public ArkClassName type;
+        public ArkClassName structType;
         public DotArkStruct data;
 
         public InlineStructProperty(IOMemoryStream ms) : base(ms)
         {
             //Determine the type.
-            type = ms.ReadInlineArkClassname();
+            structType = ms.ReadInlineArkClassname();
             
 
             //First, we check known types for the struct property list. There could be other data, but it could fail.
-            if (type.classname == "ItemNetID" || type.classname == "ItemNetInfo" || type.classname == "Transform" || type.classname == "PrimalPlayerDataStruct" || type.classname == "PrimalPlayerCharacterConfigStruct" || type.classname == "PrimalPersistentCharacterStatsStruct" || type.classname == "TribeData" || type.classname == "TribeGovernment" || type.classname == "TerrainInfo" || type.classname == "ArkInventoryData" || type.classname == "DinoOrderGroup" || type.classname == "ARKDinoData")
+            if (structType.classname == "ItemNetID" || structType.classname == "ItemNetInfo" || structType.classname == "Transform" || structType.classname == "PrimalPlayerDataStruct" || structType.classname == "PrimalPlayerCharacterConfigStruct" || structType.classname == "PrimalPersistentCharacterStatsStruct" || structType.classname == "TribeData" || structType.classname == "TribeGovernment" || structType.classname == "TerrainInfo" || structType.classname == "ArkInventoryData" || structType.classname == "DinoOrderGroup" || structType.classname == "ARKDinoData")
             {
                 //Open this as a struct property list.
                 data = new ArkStructInlineProps(ms);
             }
-            else if (type.classname == "Vector" || type.classname == "Rotator")
+            else if (structType.classname == "Vector" || structType.classname == "Rotator")
             {
                 //3d vector or rotor 
-                data = new ArkStructVector3(ms, type);
+                data = new ArkStructVector3(ms, structType);
             }
-            else if (type.classname == "Vector2D")
+            else if (structType.classname == "Vector2D")
             {
                 //2d vector
-                data = new ArkStructVector2(ms, type);
+                data = new ArkStructVector2(ms, structType);
             }
-            else if (type.classname == "Quat")
+            else if (structType.classname == "Quat")
             {
                 //Quat
-                data = new ArkStructQuat(ms, type);
+                data = new ArkStructQuat(ms, structType);
             }
-            else if (type.classname == "Color")
+            else if (structType.classname == "Color")
             {
                 //Color
-                data = new ArkStructColor(ms, type);
+                data = new ArkStructColor(ms, structType);
             }
-            else if (type.classname == "LinearColor")
+            else if (structType.classname == "LinearColor")
             {
                 //Linear color
-                data = new ArkStructLinearColor(ms, type);
+                data = new ArkStructLinearColor(ms, structType);
             }
-            else if (type.classname == "UniqueNetIdRepl")
+            else if (structType.classname == "UniqueNetIdRepl")
             {
                 //Some net stuff
-                data = new ArkStructUniqueNetId(ms, type);
+                data = new ArkStructUniqueNetId(ms, structType);
             }
             else
             {

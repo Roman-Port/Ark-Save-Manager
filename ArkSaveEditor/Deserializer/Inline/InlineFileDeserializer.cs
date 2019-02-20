@@ -57,9 +57,11 @@ namespace ArkSaveEditor.Deserializer.Inline
                 props.Add(p);
                 p = InlineProperty.ReadProperty(ms);
             }
-            Console.WriteLine("Done");
 
-            return null;
+            return new InlineFile
+            {
+                props = props
+            };
         }
     }
 }
