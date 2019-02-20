@@ -10,10 +10,8 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         public float x;
         public float y;
 
-        public ArkStructVector2(DotArkDeserializer d, ArkClassName structType)
+        public ArkStructVector2(IOMemoryStream ms, ArkClassName structType)
         {
-            var ms = d.ms;
-
             x = ms.ReadFloat();
             y = ms.ReadFloat();
         }

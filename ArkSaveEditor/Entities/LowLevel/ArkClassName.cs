@@ -31,6 +31,19 @@ namespace ArkSaveEditor.Entities.LowLevel
             return cn;
         }
 
+        public static ArkClassName ReadFromFileInline(IOMemoryStream ms)
+        {
+            ArkClassName cn = new ArkClassName();
+            //Read classname from the file.
+            cn.classname = ms.ReadUEString();
+            return cn;
+        }
+
+        public bool CompareNameTo(string n)
+        {
+            return n == classname;
+        }
+
         public bool IsNone()
         {
             return classname == "None";

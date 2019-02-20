@@ -22,27 +22,27 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
             } else if (typeName == "Vector" || typeName == "Rotator")
             {
                 //3d vector or rotor 
-                st = new ArkStructVector3(d, structType);
+                st = new ArkStructVector3(d.ms, structType);
             } else if (typeName == "Vector2D")
             {
                 //2d vector
-                st = new ArkStructVector2(d, structType);
+                st = new ArkStructVector2(d.ms, structType);
             } else if (typeName == "Quat")
             {
                 //Quat
-                st = new ArkStructQuat(d, structType);
+                st = new ArkStructQuat(d.ms, structType);
             } else if (typeName == "Color")
             {
                 //Color
-                st = new ArkStructColor(d, structType);
+                st = new ArkStructColor(d.ms, structType);
             } else if (typeName == "LinearColor")
             {
                 //Linear color
-                st = new ArkStructLinearColor(d, structType);
+                st = new ArkStructLinearColor(d.ms, structType);
             } else if (typeName == "UniqueNetIdRepl")
             {
                 //Some net stuff
-                st = new ArkStructUniqueNetId(d, structType);
+                st = new ArkStructUniqueNetId(d.ms, structType);
             } else
             {
                 //Interpet this as a struct property list. Maybe raise a warning later?

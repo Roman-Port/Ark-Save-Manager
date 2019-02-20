@@ -12,10 +12,8 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         public float b;
         public float a;
 
-        public ArkStructLinearColor(DotArkDeserializer d, ArkClassName structType)
+        public ArkStructLinearColor(IOMemoryStream ms, ArkClassName structType)
         {
-            var ms = d.ms;
-
             r = ms.ReadFloat();
             g = ms.ReadFloat();
             b = ms.ReadFloat();

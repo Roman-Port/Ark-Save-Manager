@@ -10,10 +10,8 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         public int unk;
         public string netId;
 
-        public ArkStructUniqueNetId(DotArkDeserializer d, ArkClassName structType)
+        public ArkStructUniqueNetId(IOMemoryStream ms, ArkClassName structType)
         {
-            var ms = d.ms;
-
             unk = ms.ReadInt();
             netId = ms.ReadUEString();
         }

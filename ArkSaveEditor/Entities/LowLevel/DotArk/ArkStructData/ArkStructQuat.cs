@@ -12,10 +12,8 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         public float z;
         public float w;
 
-        public ArkStructQuat(DotArkDeserializer d, ArkClassName structType)
+        public ArkStructQuat(IOMemoryStream ms, ArkClassName structType)
         {
-            var ms = d.ms;
-
             x = ms.ReadFloat();
             y = ms.ReadFloat();
             z = ms.ReadFloat();

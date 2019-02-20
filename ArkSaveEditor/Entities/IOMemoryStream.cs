@@ -53,6 +53,11 @@ namespace ArkSaveEditor.Entities
             return ArkClassName.ReadFromFile(ds);
         }
 
+        public ArkClassName ReadInlineArkClassname()
+        {
+            return ArkClassName.ReadFromFileInline(this);
+        }
+
         public uint ReadUInt()
         {
             return BitConverter.ToUInt32(PrivateReadBytes(4), 0);

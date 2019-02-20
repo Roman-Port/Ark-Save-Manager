@@ -12,10 +12,8 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         public byte r;
         public byte a;
 
-        public ArkStructColor(DotArkDeserializer d, ArkClassName structType)
+        public ArkStructColor(IOMemoryStream ms, ArkClassName structType)
         {
-            var ms = d.ms;
-
             b = ms.ReadByte();
             g = ms.ReadByte();
             r = ms.ReadByte();
