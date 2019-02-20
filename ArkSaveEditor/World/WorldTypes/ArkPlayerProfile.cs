@@ -17,8 +17,6 @@ namespace ArkSaveEditor.World.WorldTypes
         public UInt64 arkPlayerId;
         public string steamPlayerId;
         public int tribeId;
-        public double loginTime;
-        public double lastLoginTime;
 
         public static ArkPlayerProfile ReadFromFile(string filePath)
         {
@@ -36,8 +34,6 @@ namespace ArkSaveEditor.World.WorldTypes
             p.arkPlayerId = ((InlineUInt64Property)playerData.props.Find(x => x.name.CompareNameTo("PlayerDataID"))).value;
             //Steam ID is read below
             p.tribeId = ((InlineIntProperty)playerData.props.Find(x => x.name.CompareNameTo("TribeID"))).value;
-            p.loginTime = ((InlineDoubleProperty)playerData.props.Find(x => x.name.CompareNameTo("LoginTime"))).value;
-            p.lastLoginTime = ((InlineDoubleProperty)playerData.props.Find(x => x.name.CompareNameTo("LastLoginTime"))).value;
 
             //Read Steam ID
             InlineStructProperty steamStruct = (InlineStructProperty)playerData.props.Find(x => x.name.CompareNameTo("UniqueID"));
