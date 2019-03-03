@@ -11,10 +11,11 @@ namespace ArkSaveEditor.Entities
     {
         public string displayName; //The name displayed
         public bool isOfficial; //Is official map. Ragnorok is not considered official.
+        public bool isTheCenter; //The Center uses a custom formula for calculating the transformations.
 
         public float latLonMultiplier; //To convert the Lat/Long map coordinates to UE coordinates, simply subtract 50 and multiply by the value
         public WorldBounds2D bounds; //Bounds of the map in UE coords
-        public WorldTransformOffsets transformOffsets;
+        public WorldTransformOffsets transformOffsets; //Used for adjusting the map for the flat world map. These, for the most part, are only estimates.
     }
 
     /// <summary>

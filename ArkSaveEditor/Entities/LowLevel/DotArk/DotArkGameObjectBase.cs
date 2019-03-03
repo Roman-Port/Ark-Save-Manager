@@ -13,11 +13,11 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
         public ArkClassName classname;
         public bool isItem;
         public List<ArkClassName> names;
-        private bool unknownData1;
-        private int unknownData2;
+        public bool unknownData1;
+        public int unknownData2;
         public DotArkLocationData locationData; //Could be null
-        private int propDataOffset;
-        private int unknownData3;
+        public int propDataOffset;
+        public int unknownData3;
 
         // Prop data
         //public Dictionary<string, DotArkProperty> props;
@@ -89,6 +89,8 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
             bool locationDataExists = ms.ReadIntBool();
             if (locationDataExists)
                 go.locationData = ms.ReadLocationData(ds);
+            else
+                go.locationData = null;
             //Read the offset to the property data
             go.propDataOffset = ms.ReadInt();
             //Read some last unknown data

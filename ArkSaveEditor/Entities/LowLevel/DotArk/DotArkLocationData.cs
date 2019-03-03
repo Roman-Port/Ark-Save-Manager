@@ -29,6 +29,17 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
             return l;
         }
 
+        public void WriteLocationData(IOMemoryStream ms)
+        {
+            ms.WriteFloat(x);
+            ms.WriteFloat(y);
+            ms.WriteFloat(z);
+
+            ms.WriteFloat(pitch);
+            ms.WriteFloat(yaw);
+            ms.WriteFloat(roll);
+        }
+
         public DotArkLocationData()
         {
 

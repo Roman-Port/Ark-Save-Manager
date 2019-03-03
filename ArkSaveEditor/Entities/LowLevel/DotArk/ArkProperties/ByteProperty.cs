@@ -1,4 +1,5 @@
 ﻿using ArkSaveEditor.Deserializer.DotArk;
+using ArkSaveEditor.Serializer.DotArk;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,6 +35,20 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
                 byteValue = ms.ReadByte();
             else
                 enumValue = ms.ReadArkClassname(d);
+        }
+
+        public override void WriteProp(DotArkSerializerInstance s, DotArkGameObject go, DotArkFile f, IOMemoryStream ms)
+        {
+            base.WriteProp(s, go, f, ms);
+
+            //Write enum name
+            ms.WriteArkClassname(enumName, s);
+
+            //If this is a normal byte, write the byte value. Else, write the classname
+            if (isNormalByte)
+                ms.ms.WriteByte(byteValue);
+            else
+                ms.WriteArkClassname(enumValue, s);
         }
     }
 }

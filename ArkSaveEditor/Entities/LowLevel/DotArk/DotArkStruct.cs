@@ -1,5 +1,6 @@
 ﻿using ArkSaveEditor.Deserializer.DotArk;
 using ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties;
+using ArkSaveEditor.Serializer.DotArk;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -46,10 +47,16 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
             } else
             {
                 //Interpet this as a struct property list. Maybe raise a warning later?
-                throw new Exception("temp");
+                //Console.WriteLine($"Unknown struct type '{typeName}'. Interpeting as struct property list.");
+                st = new ArkStructProps(d, structType);
             }
 
             return st;
+        }
+
+        public virtual void WriteStruct(DotArkSerializerInstance s, DotArkGameObject go, DotArkFile f, IOMemoryStream ms)
+        {
+            throw new Exception("Unknown sturct type; Cannot write.");
         }
     }
 }

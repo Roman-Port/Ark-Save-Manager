@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassDefAutogenerator", "Cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArkHttpServer", "ArkHttpServer\ArkHttpServer.csproj", "{40851C2F-A9D1-40CE-85C2-F00E79CC7667}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimalDataImportTool", "PrimalDataImportTool\PrimalDataImportTool.csproj", "{2D967922-DEB3-42C9-9034-8132B12C87B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimalDataImportTool", "PrimalDataImportTool\PrimalDataImportTool.csproj", "{2D967922-DEB3-42C9-9034-8132B12C87B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMapOffsetGenerator", "WebMapOffsetGenerator\WebMapOffsetGenerator.csproj", "{58BA384B-AB2B-45B4-87A8-771416D573E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{2D967922-DEB3-42C9-9034-8132B12C87B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D967922-DEB3-42C9-9034-8132B12C87B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D967922-DEB3-42C9-9034-8132B12C87B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58BA384B-AB2B-45B4-87A8-771416D573E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BA384B-AB2B-45B4-87A8-771416D573E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BA384B-AB2B-45B4-87A8-771416D573E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BA384B-AB2B-45B4-87A8-771416D573E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

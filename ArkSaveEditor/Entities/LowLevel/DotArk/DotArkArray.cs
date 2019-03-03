@@ -23,7 +23,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
             switch (arrayType.classname)
             {
                 case "ObjectProperty": r = ReadObjectProperty(d, index, length, arrayType); break;
-                case "StructProperty": r = ReadStructProperty(d, index, length, arrayType); break; //TODO
+                case "StructProperty": r = ReadStructProperty(d, index, length, arrayType); break;
                 case "UInt32Property": r = ReadUInt32Property(d, index, length, arrayType); break;
                 case "IntProperty": r = ReadIntProperty(d, index, length, arrayType); break;
                 case "UInt16Property": r = ReadUInt16Property(d, index, length, arrayType); break;
@@ -65,16 +65,40 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
             };
         }
 
-        //TODO
         private static DotArkProperty ReadStructProperty(DotArkDeserializer d, int index, int length, ArkClassName type)
         {
             //Open
-            List<byte> data = new List<byte>();
+            List<DotArkStruct> data = new List<DotArkStruct>();
+            int arraySize = d.ms.ReadInt();
 
-            d.ms.ms.Position += length;
+            //Determine the type
+            ArkClassName structType;
+            if (arraySize * 4 + 4 == length)
+                structType = ArkClassName.Create("Color");
+            else if (arraySize * 12 + 4 == length)
+                structType = ArkClassName.Create("Vector");
+            else if (arraySize * 16 + 4 == length)
+                structType = ArkClassName.Create("LinearColor");
+            else
+                structType = null;
+
+            //Read
+            if(structType != null)
+            {
+                for(int i = 0; i<arraySize; i++)
+                {
+                    data.Add(DotArkStruct.ReadFromFile(d, structType));
+                }
+            } else
+            {
+                for (int i = 0; i < arraySize; i++)
+                {
+                    data.Add(new ArkStructProps(d, structType));
+                }
+            }
 
             //Create
-            return new ArrayProperty<byte>
+            return new ArrayProperty<DotArkStruct>
             {
                 arrayType = type,
                 index = index,

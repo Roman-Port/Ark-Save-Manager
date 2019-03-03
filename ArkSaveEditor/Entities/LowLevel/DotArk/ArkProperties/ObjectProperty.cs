@@ -1,4 +1,5 @@
 ﻿using ArkSaveEditor.Deserializer.DotArk;
+using ArkSaveEditor.Serializer.DotArk;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -49,6 +50,33 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
             {
                 if(objectId != -1)
                     gameObjectRef = d.gameObjects[objectId];
+            }
+        }
+
+        public override void WriteProp(DotArkSerializerInstance s, DotArkGameObject go, DotArkFile f, IOMemoryStream ms)
+        {
+            base.WriteProp(s, go, f, ms);
+
+            //If the length is four, just write the objectID
+            //TODO: Track the referenced GameObject so changing the index doesn't break this.
+            if(size == 4)
+            {
+                ms.WriteInt(objectId);
+            } else if (size >= 8)
+            {
+                //Write the type
+                ms.WriteInt((int)objectRefType);
+
+                //Depending on the type, write it
+                if (objectRefType == ObjectPropertyType.TypeID)
+                    ms.WriteInt(objectId);
+                else if (objectRefType == ObjectPropertyType.TypePath)
+                    ms.WriteArkClassname(className, s);
+                else
+                    throw new Exception("Unknown type of ObjectProperty.");
+            } else
+            {
+                throw new Exception($"Unknown ObjectProperty length, {size}. Cannot write.");
             }
         }
     }

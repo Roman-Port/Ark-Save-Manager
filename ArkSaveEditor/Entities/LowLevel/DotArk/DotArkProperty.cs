@@ -1,5 +1,6 @@
 ﻿using ArkSaveEditor.Deserializer.DotArk;
 using ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties;
+using ArkSaveEditor.Serializer.DotArk;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -45,7 +46,6 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
 
             //Read in the index and size 
             int size = ms.ReadInt();
-            //Skip 4 bytes? I have no idea
             int index = ms.ReadInt();
 
             //Based on the type, deserialize this.
@@ -111,6 +111,24 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk
             prop.size = size;
 
             return prop;
+        }
+
+        /// <summary>
+        /// When overwritten, this function will write the prop
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="go"></param>
+        /// <param name="f"></param>
+        /// <param name="ms"></param>
+        public virtual void WriteProp(DotArkSerializerInstance s, DotArkGameObject go, DotArkFile f, IOMemoryStream ms)
+        {
+            //Write the header data
+            ms.WriteArkClassname(name, s);
+            ms.WriteArkClassname(type, s);
+            ms.WriteInt(size);
+            ms.WriteInt(index);
+
+            //Now, the overwritten function will run.
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ArkSaveEditor.Deserializer.DotArk;
+using ArkSaveEditor.Serializer.DotArk;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,12 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         {
             unk = ms.ReadInt();
             netId = ms.ReadUEString();
+        }
+
+        public override void WriteStruct(DotArkSerializerInstance s, DotArkGameObject go, DotArkFile f, IOMemoryStream ms)
+        {
+            ms.WriteInt(unk);
+            ms.WriteUEString(netId);
         }
     }
 }

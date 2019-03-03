@@ -1,4 +1,5 @@
 ﻿using ArkSaveEditor.Deserializer.DotArk;
+using ArkSaveEditor.Serializer.DotArk;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,15 @@ namespace ArkSaveEditor.Entities.LowLevel
     {
         public string classname;
         public int index;
+
+        public static ArkClassName Create(string name, int index = 0)
+        {
+            return new ArkClassName
+            {
+                classname = name,
+                index = index
+            };
+        }
 
         public static ArkClassName ReadFromFile(DotArkDeserializer ark)
         {
@@ -29,6 +39,16 @@ namespace ArkSaveEditor.Entities.LowLevel
             //Read the unique index
             cn.index = ark.ms.ReadInt();
             return cn;
+        }
+
+        public void WriteToDotArkFile(DotArkSerializerInstance ark, IOMemoryStream ms)
+        {
+            //Get name table index.
+            int nameTableIndex = ark.GetNameTableEntry(classname);
+
+            //Write nameTableIndex and the index
+            ms.WriteInt(nameTableIndex);
+            ms.WriteInt(index);
         }
 
         public static ArkClassName ReadFromFileInline(IOMemoryStream ms)
