@@ -110,6 +110,8 @@ namespace ArkSaveEditor.World.WorldTypes
             var inventoryComponent = ((ObjectProperty)GetPropertiesByName("MyInventoryComponent")[0]).gameObjectRef;
 
             //Get the items
+            if (!inventoryComponent.PropExistsName("InventoryItems"))
+                return new List<ArkPrimalItem>();
             var inventoryItems = ((ArrayProperty<ObjectProperty>)inventoryComponent.GetPropsByName("InventoryItems")[0]).items;
 
             //Get the referenced items
