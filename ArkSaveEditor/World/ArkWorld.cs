@@ -80,7 +80,7 @@ namespace ArkSaveEditor.World
             //Get bounds if needed
             if (bounds == null)
                 bounds = mapinfo.bounds;
-            
+
             //Create this array
             List<ArkDinosaur>[,] output = new List<ArkDinosaur>[tile_axis_count, tile_axis_count];
 
@@ -89,7 +89,7 @@ namespace ArkSaveEditor.World
             float ySize = (float)bounds.height / (float)tile_axis_count;
 
             //Loop through each dino
-            foreach(var dino in dinos)
+            foreach (var dino in dinos)
             {
                 //Get dino pos
                 float normalizedX = dino.location.x - bounds.minX;
@@ -101,7 +101,7 @@ namespace ArkSaveEditor.World
 
                 //Normalize the cells so we can apply the transforms
                 //Apply transforms
-                Vector2 adjusted = mapinfo.transformOffsets.Apply(new Vector2(cellX / tile_axis_count, cellY / tile_axis_count));
+                Vector2 adjusted = mapinfo.ConvertFromGamePositionToNormalized(new Vector2(dino.location.x, dino.location.y));
 
                 //Reexpand
                 cellX = adjusted.x * tile_axis_count;
@@ -112,7 +112,7 @@ namespace ArkSaveEditor.World
                 int cellIdY = (int)Math.Round(cellY);
 
                 //Check if in bounds
-                if(cellIdX < 0 || cellIdY < 0 || cellIdX >= tile_axis_count || cellIdY >= tile_axis_count)
+                if (cellIdX < 0 || cellIdY < 0 || cellIdX >= tile_axis_count || cellIdY >= tile_axis_count)
                 {
                     continue;
                 }
