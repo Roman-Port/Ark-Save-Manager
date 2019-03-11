@@ -100,12 +100,12 @@ namespace ArkSaveEditor.World.WorldTypes
         /// <summary>
         /// Get the items in this dino's inventory.
         /// </summary>
-        public List<ArkPrimalItem> GetInventoryItems()
+        public List<ArkPrimalItem> GetInventoryItems(bool includeEngrams = false)
         {
             //If we don't have an inventory compnent, return empty list
             if (!HasProperty("MyInventoryComponent"))
                 return new List<ArkPrimalItem>();
-            
+
             //Get the inventory component from our props. This is ref
             var inventoryComponent = ((ObjectProperty)GetPropertiesByName("MyInventoryComponent")[0]).gameObjectRef;
 
@@ -116,7 +116,9 @@ namespace ArkSaveEditor.World.WorldTypes
             List<ArkPrimalItem> stacks = new List<ArkPrimalItem>();
             foreach (var o in inventoryItems)
             {
-                stacks.Add(new ArkPrimalItem(world, o.gameObjectRef));
+                ArkPrimalItem item = new ArkPrimalItem(world, o.gameObjectRef);
+                if (!includeEngrams || !item.isEngram)
+                    stacks.Add(item);
             }
             return stacks;
         }
