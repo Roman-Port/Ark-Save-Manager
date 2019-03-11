@@ -11,6 +11,7 @@ namespace ArkSaveEditor.Entities
     {
         public string displayName; //The name displayed
         public bool isOfficial; //Is official map. Ragnorok is not considered official.
+        public string backgroundColor; //Background color around the map. Null if there is no one complete color, such as Extinction
 
         public float latLonMultiplier; //To convert the Lat/Long map coordinates to UE coordinates, simply subtract 50 and multiply by the value
         public WorldBounds2D bounds; //Bounds of the map in UE coords
