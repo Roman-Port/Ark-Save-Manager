@@ -119,7 +119,7 @@ namespace ArkSaveEditor.World.WorldTypes
             foreach (var o in inventoryItems)
             {
                 ArkPrimalItem item = new ArkPrimalItem(world, o.gameObjectRef);
-                if (!includeEngrams || !item.isEngram)
+                if (includeEngrams || !item.isEngram)
                     stacks.Add(item);
             }
             return stacks;
