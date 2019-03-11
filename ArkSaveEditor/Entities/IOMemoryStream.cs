@@ -27,6 +27,14 @@ namespace ArkSaveEditor.Entities
             }
         }
 
+        public long length
+        {
+            get
+            {
+                return ms.Length;
+            }
+        }
+
         public IOMemoryStream(MemoryStream ms, bool is_little_endian)
         {
             this.ms = ms;
@@ -244,7 +252,7 @@ namespace ArkSaveEditor.Entities
             byte[] buf = Encoding.UTF8.GetBytes(data);
 
             //Write the length
-            WriteInt(buf.Length);
+            WriteInt(buf.Length+1);
 
             //Write data
             ms.Write(buf, 0, buf.Length);
@@ -271,6 +279,11 @@ namespace ArkSaveEditor.Entities
         public void WriteBytes(byte[] buf)
         {
             ms.Write(buf, 0, buf.Length);
+        }
+
+        public void WriteByte(byte buf)
+        {
+            ms.WriteByte(buf);
         }
 
         public void WriteLocationData(DotArkLocationData l)

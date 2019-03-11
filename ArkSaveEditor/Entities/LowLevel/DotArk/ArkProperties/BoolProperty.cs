@@ -19,13 +19,12 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
         {
             base.WriteProp(s, go, f, ms);
 
-            //I feel like a monster doing this. Convert the boolean to an integer
-            int value = 0;
+            byte value = 0;
             if ((bool)data)
                 value = 1;
 
             //Write
-            ms.WriteInt(value);
+            ms.WriteByte(value);
         }
     }
 }

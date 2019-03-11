@@ -24,7 +24,7 @@ namespace ArkSaveEditor.Deserializer.DotArk
         public long gameObjectBlockStartOffset;
 
         public int unknownData1; //Unknown data in version 7+ header
-        public int unknownData2; //Unknown data in version 9 header
+        public int saveCount; //The number of times this file has been written.
 
         public string[] binaryDataNames; //Map parts, such as "Extinction", "C1_Far", "C2_Far"
         public DotArkEmbededBinaryData[] embededBinaryData;
@@ -36,12 +36,18 @@ namespace ArkSaveEditor.Deserializer.DotArk
         {
             //Convert this to our IO Memory Stream
             ms = new IOMemoryStream(mms, true);
+            return OpenArkFile(ms);
+        }
+
+        public DotArkFile OpenArkFile(IOMemoryStream ms)
+        {
+            this.ms = ms;
             //Initialize our variables
             ark = new DotArkFile();
             //Open the header data.
             ReadHeader();
             //Read in the binary data names, such as "Extinction", "C1_Far", "C2_Far"
-            binaryDataNames = ReadStringArray();
+            binaryDataNames = ReadStringArray(ms);
             //Read the embeded binary data.
             ReadArkEmbededBinaryData();
             //Finally, read the mystery flags
@@ -49,7 +55,7 @@ namespace ArkSaveEditor.Deserializer.DotArk
             //Save our position and read the class name block.
             gameObjectBlockStartOffset = ms.ms.Position; //Save location
             ms.ms.Position = nameTableOffset; //Jump to the table
-            binaryNameTable = ReadStringArray(); //Read in the data
+            binaryNameTable = ReadStringArray(ms); //Read in the data
             ms.ms.Position = gameObjectBlockStartOffset; //Jump back to continue reading the file.
             //Read the GameObject table. 
             ReadGameObjectTable();
@@ -88,7 +94,7 @@ namespace ArkSaveEditor.Deserializer.DotArk
                 gameObjects.Add(DotArkGameObject.ReadBaseFromFile(this));
         }
 
-        string[] ReadStringArray()
+        public static string[] ReadStringArray(IOMemoryStream ms)
         {
             //Read a standard array. First, read the Int32 of the length
             int length = ms.ReadInt();
@@ -142,7 +148,7 @@ namespace ArkSaveEditor.Deserializer.DotArk
                     nameTableOffset = ms.ReadInt();
                     propertiesBlockOffset = ms.ReadInt();
                     ark.gameTime = ms.ReadFloat();
-                    unknownData2 = ms.ReadInt();
+                    saveCount = ms.ReadInt();
                     break;
                 default:
                     throw new Exception($"Unknown game version {saveVersion.ToString()}, expected 5-9.");

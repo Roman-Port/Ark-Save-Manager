@@ -23,7 +23,7 @@ namespace ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties
             size = 4;
 
             base.WriteProp(s, go, f, ms);
-
+            ms.WriteArkClassname(arrayType, s);
             ms.WriteInt(0);
         }
     }

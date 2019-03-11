@@ -70,7 +70,6 @@ namespace ArkSaveEditor.World.WorldTypes
             if(orig.PropExistsName("ItemQuantity"))
                 stackSize = (int)orig.GetPropByName("ItemQuantity").data;
             owner = new HighLevelArkGameObjectRef(world, (orig.GetPropsByName<ObjectProperty>("OwnerInventory")[0]).gameObjectRef);
-            lastDurabilityDecreaseTime = (double)orig.GetPropsByName<DoubleProperty>("LastAutoDurabilityDecreaseTime")[0].data;
 
             //Convert ItemID
             ArkStructProps itemIdStruct = (ArkStructProps)orig.GetPropsByName<StructProperty>("ItemId")[0].structData;
@@ -98,6 +97,12 @@ namespace ArkSaveEditor.World.WorldTypes
                 crafterTribe = GetStringProperty("CrafterTribeName");
             else
                 crafterTribe = null;
+
+            if (CheckIfValueExists("LastAutoDurabilityDecreaseTime"))
+                lastDurabilityDecreaseTime = (double)orig.GetPropsByName<DoubleProperty>("LastAutoDurabilityDecreaseTime")[0].data;
+            else
+                lastDurabilityDecreaseTime = -1;
+
         }
     }
 }
