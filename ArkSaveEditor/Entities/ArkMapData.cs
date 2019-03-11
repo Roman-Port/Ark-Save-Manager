@@ -11,39 +11,40 @@ namespace ArkSaveEditor.Entities
     {
         public string displayName; //The name displayed
         public bool isOfficial; //Is official map. Ragnorok is not considered official.
-        public bool isTheCenter; //The Center uses a custom formula for calculating the transformations.
 
         public float latLonMultiplier; //To convert the Lat/Long map coordinates to UE coordinates, simply subtract 50 and multiply by the value
         public WorldBounds2D bounds; //Bounds of the map in UE coords
-        public WorldTransformOffsets transformOffsets; //Used for adjusting the map for the flat world map. These, for the most part, are only estimates.
-    }
 
-    /// <summary>
-    /// Transfroms applied to make the game data line up with the web world map. Applied when the center is at zero and the range is 0.5 to -0.5
-    /// </summary>
-    public class WorldTransformOffsets
-    {
-        public float offsetX;
-        public float offsetY;
+        public float pixelsPerMeter; //Game units per pixel on source
+        public float sourceImageSize; //Size of the source image used to calculate meters per pixel.
+        public Vector2 mapImageOffset; //Offset to move the Ark position by in order for it to fit in the center of the image.
 
-        public float sizeMult;
-
-        public Vector2 Apply(Vector2 input)
+        /// <summary>
+        /// Converts from Ark position to normalized, between (-0.5, 0.5).
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public Vector2 ConvertFromGamePositionToNormalized(Vector2 input)
         {
-            Vector2 adjusted_map_pos = input.Clone();
-            
-            //Offset to make transformations easier
-            adjusted_map_pos.Subtract(0.5f);
+            Vector2 o = input.Clone();
 
-            //Run transformations
-            adjusted_map_pos.Multiply(sizeMult);
-            adjusted_map_pos.y += offsetY;
-            adjusted_map_pos.x += offsetX;
+            //Translate by the map image offset
+            if (mapImageOffset != null)
+            {
+                o.x += mapImageOffset.x;
+                o.y += mapImageOffset.y;
+            }
 
-            //Undo the ease of use transform conversions
-            adjusted_map_pos.Add(0.5f);
+            //Scale this to pixel space
+            o.Multiply(pixelsPerMeter);
 
-            return adjusted_map_pos;
+            //Scale with image
+            o.Divide(sourceImageSize * 100); //I'll be honest. I don't really know why multiplying that by 100 works. It just does. Uh oh
+
+            //Move
+            o.Add(0.5f);
+
+            return o;
         }
     }
 }
