@@ -96,6 +96,7 @@ namespace ArkSaveEditor.World.WorldTypes
         public float babyAge;
         public bool isBaby;
         public double nextImprintTime;
+        public float imprintQuality;
 
         /// <summary>
         /// Get the items in this dino's inventory.
@@ -204,7 +205,11 @@ namespace ArkSaveEditor.World.WorldTypes
                     babyAge = GetFloatProperty("BabyAge");
                     nextImprintTime = -1;
                     if(HasProperty("BabyNextCuddleTime"))
-                        GetDoubleProperty("BabyNextCuddleTime");
+                        nextImprintTime = GetDoubleProperty("BabyNextCuddleTime");
+                    if (statusComponent.HasProperty("DinoImprintingQuality"))
+                        imprintQuality = statusComponent.GetFloatProperty("DinoImprintingQuality");
+                    else
+                        imprintQuality = 0;
                 }
                 
             }
