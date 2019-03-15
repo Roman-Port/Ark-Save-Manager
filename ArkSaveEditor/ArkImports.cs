@@ -23,9 +23,9 @@ namespace ArkSaveEditor
 
         public static ArkDinoEntry GetDinoDataByClassname(string classname)
         {
-            foreach(var d in dino_entries)
+            foreach (var d in dino_entries)
             {
-                if (d.classname == classname)
+                if (d.classname+"_C" == classname)
                     return d;
             }
             return null;
