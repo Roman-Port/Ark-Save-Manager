@@ -170,7 +170,12 @@ namespace ArkSaveEditor.World.WorldTypes
             for (int i = 0; i < colors.Length; i++) //For each color region this dinosaur has. Each "ColorSetIndices" value is a color region.
             {
                 colors[i] = ((ByteProperty)colorAttrib[i]).byteValue; //Get the index in the color table by getting the byte value out of the property
-                colors_hex[i] = ArkColorIds.ARK_COLOR_IDS[colors[i] - 1]; //Look this up in the color table to get the nice HTML value.
+                //Validate that the color is in range
+                byte color = colors[i];
+                if (color <= 0 || color > ArkColorIds.ARK_COLOR_IDS.Length)
+                    colors_hex[i] = "#FFF";
+                else
+                    colors_hex[i] = ArkColorIds.ARK_COLOR_IDS[colors[i] - 1]; //Look this up in the color table to get the nice HTML value.
             }
             //Read the dinosaur ID by combining the the bytes of the two UInt32 values.
             byte[] buf = new byte[8];
