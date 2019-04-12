@@ -158,6 +158,7 @@ namespace ArkSaveEditor.World
         //GameObject types
         public List<ArkDinosaur> dinos = new List<ArkDinosaur>();
         public List<ArkPlayerProfile> players = new List<ArkPlayerProfile>();
+        public List<ArkTribeProfile> tribes = new List<ArkTribeProfile>();
 
         /// <summary>
         /// Convert the map from a low-level object to a high-level object.
@@ -173,13 +174,18 @@ namespace ArkSaveEditor.World
 
             //Loop through all .arkprofile files here and add them to the player list.
             string[] saveFilePaths = Directory.GetFiles(savePath);
-            foreach(string playerProfilePath in saveFilePaths)
+            foreach(string profilePathname in saveFilePaths)
             {
-                if (!playerProfilePath.ToLower().EndsWith(".arkprofile"))
-                    continue; //Skip.
-
-                //This is an ARK profile. Open it.
-                players.Add(ArkPlayerProfile.ReadFromFile(playerProfilePath));
+                if (profilePathname.ToLower().EndsWith(".arkprofile"))
+                {
+                    //This is an ARK profile. Open it.
+                    players.Add(ArkPlayerProfile.ReadFromFile(profilePathname));
+                }
+                if (profilePathname.ToLower().EndsWith(".arktribe"))
+                {
+                    //This is an ARK tribe. Open it.
+                    tribes.Add(new ArkTribeProfile(profilePathname, this));
+                }
             }
 
             //Check to see if we have imported data. This will crash if we have not.

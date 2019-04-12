@@ -1,4 +1,5 @@
-﻿using ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties;
+﻿using ArkSaveEditor.Entities.LowLevel.DotArk;
+using ArkSaveEditor.Entities.LowLevel.DotArk.ArkProperties;
 using ArkSaveEditor.Entities.LowLevel.Inline.InlineProperties;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace ArkSaveEditor.World.WorldTypes
     public class ArkPlayerProfile
     {
         public string playerName;
+        public string ingamePlayerName;
         public UInt64 arkPlayerId;
         public string steamPlayerId;
         public int tribeId;
@@ -32,8 +34,13 @@ namespace ArkSaveEditor.World.WorldTypes
             ArkPlayerProfile p = new ArkPlayerProfile();
             p.playerName = ((InlineStrProperty)playerData.props.Find(x => x.name.CompareNameTo("PlayerName"))).value;
             p.arkPlayerId = ((InlineUInt64Property)playerData.props.Find(x => x.name.CompareNameTo("PlayerDataID"))).value;
+
             //Steam ID is read below
             p.tribeId = ((InlineIntProperty)playerData.props.Find(x => x.name.CompareNameTo("TribeID"))).value;
+
+            //in-game name is read below
+            InlineStructProperty playerStats = (InlineStructProperty)(playerData.props.Where(x => x.name.CompareNameTo("MyPlayerCharacterConfig")).ToArray()[0]);
+            p.ingamePlayerName = ((InlineStrProperty)(((ArkStructInlineProps)playerStats.data).props.Where(x => x.name.CompareNameTo("PlayerCharacterName")).ToArray()[0])).value;
 
             //Read Steam ID
             InlineStructProperty steamStruct = (InlineStructProperty)playerData.props.Find(x => x.name.CompareNameTo("UniqueID"));
