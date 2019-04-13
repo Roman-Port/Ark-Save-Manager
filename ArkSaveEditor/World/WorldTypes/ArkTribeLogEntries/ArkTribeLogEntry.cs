@@ -20,16 +20,17 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
         public string serverId;
 
         //Functions
-        public static ArkTribeLogEntry ParseEntry(ArkTribeLogString str, List<ArkPlayerProfile> playerProfiles, List<ArkDinosaur> globalDinos, int tribeId)
+        public delegate void OnFindSteamProfile(string steamId);
+        public static ArkTribeLogEntry ParseEntry(ArkTribeLogString str, List<ArkPlayerProfile> playerProfiles, List<ArkDinosaur> globalDinos, int tribeId, OnFindSteamProfile steamCallback)
         {
             string content = str.content;
 
             //Determine what type of content this is with a regex. Yuck.
             ArkTribeLogEntry entry = null;
             if (TestRegex(content, REGEX_TAMED))
-                entry = new ArkTribeLogEntry_Tamed(content, playerProfiles, globalDinos, tribeId);
+                entry = new ArkTribeLogEntry_Tamed(content, playerProfiles, globalDinos, tribeId, steamCallback);
             if (TestRegex(content, REGEX_TARGETKILLEDTARGET))
-                entry = new ArkTribeLogEntry_TargetKilledTarget(content, playerProfiles, globalDinos, tribeId);
+                entry = new ArkTribeLogEntry_TargetKilledTarget(content, playerProfiles, globalDinos, tribeId, steamCallback);
 
             if(entry == null)
             {
@@ -59,7 +60,7 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
             return m.Groups;
         }
 
-        public static ArkTribeLogPlayerTarget TryFindPlayerProfile(string name, List<ArkPlayerProfile> playerProfiles, int tribeId, bool constrictToTribe)
+        public static ArkTribeLogPlayerTarget TryFindPlayerProfile(string name, List<ArkPlayerProfile> playerProfiles, int tribeId, bool constrictToTribe, OnFindSteamProfile steamCallback)
         {
             //Find player profiles matching this name. 
             var profiles = playerProfiles.Where(x => x.ingamePlayerName == name && (x.tribeId == tribeId || !constrictToTribe)).ToArray();
@@ -67,6 +68,7 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
             //If results were found, return them. 
             if(profiles.Length >= 1)
             {
+                steamCallback(profiles[0].steamPlayerId);
                 return new ArkTribeLogPlayerTarget
                 {
                     exact = profiles.Length == 1,
@@ -152,7 +154,7 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
             }
         }
 
-        public static ArkTribeLogPlayerOrDinoTarget TryFindDinoOrPlayerProfile(Group name, Group level, Group classname, List<ArkPlayerProfile> playerProfiles, List<ArkDinosaur> globalDinos, int tribeId, bool isWild)
+        public static ArkTribeLogPlayerOrDinoTarget TryFindDinoOrPlayerProfile(Group name, Group level, Group classname, List<ArkPlayerProfile> playerProfiles, List<ArkDinosaur> globalDinos, int tribeId, bool isWild, OnFindSteamProfile steamCallback)
         {
             //Try to find a player first, then try a dino.
             try
@@ -160,7 +162,7 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
                 string nameString = name.Value;
                 if (nameString.StartsWith("Tribemember "))
                     nameString = nameString.Substring("Tribemember ".Length);
-                ArkTribeLogPlayerTarget t = TryFindPlayerProfile(nameString, playerProfiles, tribeId, false);
+                ArkTribeLogPlayerTarget t = TryFindPlayerProfile(nameString, playerProfiles, tribeId, false, steamCallback);
                 if(t.found)
                 {
                     return new ArkTribeLogPlayerOrDinoTarget

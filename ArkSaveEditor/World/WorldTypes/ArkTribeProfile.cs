@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries.ArkTribeLogEntry;
 
 namespace ArkSaveEditor.World.WorldTypes
 {
@@ -54,7 +55,7 @@ namespace ArkSaveEditor.World.WorldTypes
             return null;
         }
 
-        public List<ArkTribeLogEntry> GetTribeLog()
+        public List<ArkTribeLogEntry> GetTribeLog(OnFindSteamProfile steamCallback)
         {
             //Open tribe log data.
             InlineProperty tribeLogData = GetPropertyByName("TribeLog");
@@ -65,7 +66,7 @@ namespace ArkSaveEditor.World.WorldTypes
             foreach (string s in arr.data)
             {
                 ArkTribeLogString str = ArkTribeLogString.ParseArkML(s);
-                ArkTribeLogEntry entry = ArkTribeLogEntry.ParseEntry(str, linkedWorld.players, linkedWorld.dinos, tribeId);
+                ArkTribeLogEntry entry = ArkTribeLogEntry.ParseEntry(str, linkedWorld.players, linkedWorld.dinos, tribeId, steamCallback);
                 if (entry != null)
                 {
                     output.Add(entry);
