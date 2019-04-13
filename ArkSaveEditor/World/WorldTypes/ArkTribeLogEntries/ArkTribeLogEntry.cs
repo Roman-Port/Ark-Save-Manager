@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArkSaveEditor.ArkEntries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -94,6 +95,12 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
             //Find profiles matching this.
             var profiles = globalDinos.Where(x => x.isTamed == true && x.tamedName == name && x.dino_entry.screen_name == classname.Trim(' ').Trim('(').Trim(')') && (x.tribeId == tribeId || !constrictToTribe)).ToArray();
 
+            //Find dino entries matching this too
+            var dinoEntries = ArkImports.dino_entries.Where(x => x.screen_name == classname.Trim(' ').Trim('(').Trim(')')).ToArray();
+            ArkDinoEntry dinoEntry = null;
+            if (dinoEntries.Length > 0)
+                dinoEntry = dinoEntries[0];
+
             //If results were found, return them
             if(profiles.Length >= 1)
             {
@@ -105,7 +112,8 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
                     found = true,
                     exact = profiles.Length == 1,
                     profile = profiles[0],
-                    isTamed = true
+                    isTamed = true,
+                    dinoEntry = dinoEntry
                 };
             } else
             {
@@ -117,7 +125,8 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
                     found = false,
                     exact = true,
                     profile = null,
-                    isTamed = true
+                    isTamed = true,
+                    dinoEntry = dinoEntry
                 };
             }
         }
@@ -226,6 +235,7 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
 
         public bool isTamed; //If this is a tamed dino
         public ArkDinosaur profile; //The profile of the dino. Could be null
+        public ArkDinoEntry dinoEntry; //The class entry. Could be null.
         public string name; //Never null.
         public int level; //Never null.
         public string displayClassname; //Never null.
