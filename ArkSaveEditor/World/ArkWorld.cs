@@ -159,6 +159,7 @@ namespace ArkSaveEditor.World
         public List<ArkDinosaur> dinos = new List<ArkDinosaur>();
         public List<ArkPlayerProfile> players = new List<ArkPlayerProfile>();
         public List<ArkTribeProfile> tribes = new List<ArkTribeProfile>();
+        public List<ArkPlayer> playerCharacters = new List<ArkPlayer>();
 
         /// <summary>
         /// Convert the map from a low-level object to a high-level object.
@@ -203,11 +204,19 @@ namespace ArkSaveEditor.World
             {
                 var g = sources[i];
                 string classname = g.classname.classname;
+
                 //Check if this is a dinosaur by matching the classname.
                 if (Enum.TryParse<DinoClasses>(classname, out DinoClasses dinoClass))
                 {
                     //This is a dinosaur.
                     dinos.Add(new ArkDinosaur(this, this.sources[i]));
+                }
+
+                //Check if this is a player
+                if(classname == "PlayerPawnTest_Male_C" || classname == "PlayerPawnTest_Female_C")
+                {
+                    //This is a player.
+                    playerCharacters.Add(new ArkPlayer(this, this.sources[i]));
                 }
             }
 

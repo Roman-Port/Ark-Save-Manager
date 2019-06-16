@@ -217,5 +217,10 @@ namespace ArkSaveEditor.World
             var arr = source.props.Where(x => x.name.classname == name).ToArray();
             return arr.Length != 0;
         }
+
+        public UInt64 GetUInt64Property(string name)
+        {
+            return (UInt64)GetSingleProperty(name).data;
+        }
     }
 }
