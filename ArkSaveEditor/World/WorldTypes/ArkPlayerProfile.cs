@@ -36,7 +36,12 @@ namespace ArkSaveEditor.World.WorldTypes
             p.arkPlayerId = ((InlineUInt64Property)playerData.props.Find(x => x.name.CompareNameTo("PlayerDataID"))).value;
 
             //Steam ID is read below
-            p.tribeId = ((InlineIntProperty)playerData.props.Find(x => x.name.CompareNameTo("TribeID"))).value;
+            p.tribeId = -1;
+            try
+            {
+                p.tribeId = ((InlineIntProperty)playerData.props.Find(x => x.name.CompareNameTo("TribeID"))).value;
+            }
+            catch { }
 
             //in-game name is read below
             InlineStructProperty playerStats = (InlineStructProperty)(playerData.props.Where(x => x.name.CompareNameTo("MyPlayerCharacterConfig")).ToArray()[0]);

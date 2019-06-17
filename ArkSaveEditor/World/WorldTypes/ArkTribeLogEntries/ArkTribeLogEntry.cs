@@ -93,7 +93,7 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
         public static ArkTribeLogDinoTarget TryFindDinoProfile(string name, int level, string classname, int tribeId, List<ArkDinosaur> globalDinos, bool constrictToTribe)
         {
             //Find profiles matching this.
-            var profiles = globalDinos.Where(x => x.isTamed == true && x.tamedName == name && x.dino_entry.screen_name == classname.Trim(' ').Trim('(').Trim(')') && (x.tribeId == tribeId || !constrictToTribe)).ToArray();
+            var profiles = globalDinos.Where(x => x.isTamed == true && x.tamedName == name && x.dino_entry != null && x.dino_entry.screen_name == classname.Trim(' ').Trim('(').Trim(')') && (x.tribeId == tribeId || !constrictToTribe)).ToArray();
 
             //Find dino entries matching this too
             var dinoEntries = ArkImports.dino_entries.Where(x => x.screen_name == classname.Trim(' ').Trim('(').Trim(')')).ToArray();
