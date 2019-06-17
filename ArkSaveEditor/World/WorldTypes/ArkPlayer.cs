@@ -39,6 +39,11 @@ namespace ArkSaveEditor.World.WorldTypes
         /// </summary>
         public ulong arkId;
 
+        /// <summary>
+        /// Is in a tribe
+        /// </summary>
+        public bool isInTribe;
+
         public ArkPlayer(ArkWorld world, DotArkGameObject orig) : base(world, orig)
         {
             playerName = GetStringProperty("PlayerName");
@@ -49,8 +54,17 @@ namespace ArkSaveEditor.World.WorldTypes
             ArkStructUniqueNetId nsprop = (ArkStructUniqueNetId)sprop.structData;
             steamId = nsprop.netId;
 
-            tribeName = GetStringProperty("TribeName");
-            tribeId = GetInt32Property("TargetingTeam");
+            if(HasProperty("TribeName"))
+            {
+                tribeName = GetStringProperty("TribeName");
+                tribeId = GetInt32Property("TargetingTeam");
+                isInTribe = true;
+            } else
+            {
+                tribeName = "No Tribe";
+                tribeId = -1;
+                isInTribe = false;
+            }
             arkId = GetUInt64Property("LinkedPlayerDataID");
         }
 
