@@ -16,7 +16,7 @@ namespace ArkSaveEditor.Deserializer.Inline
             InlineFile f;
             using (MemoryStream ms = new MemoryStream())
             {
-                using (FileStream fs = new FileStream(path, FileMode.Open))
+                using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
                     fs.CopyTo(ms);
                 }
