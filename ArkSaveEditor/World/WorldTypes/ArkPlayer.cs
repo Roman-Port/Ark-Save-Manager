@@ -44,16 +44,28 @@ namespace ArkSaveEditor.World.WorldTypes
         /// </summary>
         public bool isInTribe;
 
+        /// <summary>
+        /// Is this player living?
+        /// </summary>
+        public bool isAlive;
+
+        /// <summary>
+        /// Stats. May be null.
+        /// </summary>
+        public ArkDinosaurStats currentStats;
+
         public ArkPlayer(ArkWorld world, DotArkGameObject orig) : base(world, orig)
         {
             playerName = GetStringProperty("PlayerName");
             steamName = GetStringProperty("PlatformProfileName");
+            arkId = GetUInt64Property("LinkedPlayerDataID");
 
             //Read the struct containing Steam ID
             StructProperty sprop = (StructProperty)GetSingleProperty("PlatformProfileID");
             ArkStructUniqueNetId nsprop = (ArkStructUniqueNetId)sprop.structData;
             steamId = nsprop.netId;
 
+            //Tribe stuff
             if(HasProperty("TribeName"))
             {
                 tribeName = GetStringProperty("TribeName");
@@ -65,7 +77,17 @@ namespace ArkSaveEditor.World.WorldTypes
                 tribeId = -1;
                 isInTribe = false;
             }
-            arkId = GetUInt64Property("LinkedPlayerDataID");
+            
+            //Check if alive
+            try
+            {
+                HighLevelArkGameObjectRef statusComponent = GetGameObjectRef("MyCharacterStatusComponent");
+                currentStats = ArkDinosaurStats.ReadStats(statusComponent, "CurrentStatusValues", false);
+                isAlive = currentStats.health > 0.1f;
+            } catch
+            {
+                isAlive = false;
+            }
         }
 
         /// <summary>
