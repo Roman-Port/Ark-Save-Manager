@@ -9,6 +9,7 @@ using ArkSaveEditor.World.WorldTypes;
 using ArkSaveEditor.Entities;
 using Newtonsoft.Json;
 using System.IO;
+using ArkSaveEditor.ArkEntries;
 
 namespace ArkSaveEditor.World
 {
@@ -157,6 +158,7 @@ namespace ArkSaveEditor.World
 
         //GameObject types
         public List<ArkDinosaur> dinos = new List<ArkDinosaur>();
+        public List<ArkStructure> structures = new List<ArkStructure>();
         public List<ArkPlayerProfile> players = new List<ArkPlayerProfile>();
         public List<ArkTribeProfile> tribes = new List<ArkTribeProfile>();
         public List<ArkPlayer> playerCharacters = new List<ArkPlayer>();
@@ -217,6 +219,14 @@ namespace ArkSaveEditor.World
                 {
                     //This is a player.
                     playerCharacters.Add(new ArkPlayer(this, this.sources[i]));
+                }
+
+                //Check if this is a structure
+                StructureDisplayMetadata metadata = ArkImports.GetStructureDisplayMetadataByClassname(classname);
+                if(metadata != null)
+                {
+                    //This is a structure.
+                    structures.Add(new ArkStructure(this, this.sources[i], metadata));
                 }
             }
 
