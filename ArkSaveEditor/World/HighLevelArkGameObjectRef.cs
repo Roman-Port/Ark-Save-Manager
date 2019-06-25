@@ -131,7 +131,7 @@ namespace ArkSaveEditor.World
         /// <summary>
         /// Raw access to the properties.
         /// </summary>
-        //[Newtonsoft.Json.JsonIgnoreAttribute]
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public List<DotArkProperty> rawProperties
         {
             get
