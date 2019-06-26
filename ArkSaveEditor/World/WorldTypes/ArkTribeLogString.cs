@@ -10,6 +10,8 @@ namespace ArkSaveEditor.World.WorldTypes
         public string timeData;
         public string content;
 
+        public string raw;
+
         public float r;
         public float g;
         public float b;
@@ -17,6 +19,7 @@ namespace ArkSaveEditor.World.WorldTypes
 
         public static ArkTribeLogString ParseArkML(string s)
         {
+            raw = s;
             //First, split the day and the content
             string dateData = s.Substring(0, s.IndexOf(','));
             string timeData = s.Substring(dateData.Length + 2, 8);

@@ -19,6 +19,8 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
         public string gameDay;
         public string gameTime;
         public string serverId;
+        public string raw;
+        public int tribeId;
 
         //Functions
         public delegate void OnFindSteamProfile(string steamId);
@@ -42,6 +44,8 @@ namespace ArkSaveEditor.World.WorldTypes.ArkTribeLogEntries
             //Add date and server information.
             entry.gameDay = str.dateData;
             entry.gameTime = str.timeData;
+            entry.tribeId = tribeId;
+            entry.raw = str.raw;
             return entry;
         }
 

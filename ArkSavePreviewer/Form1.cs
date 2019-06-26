@@ -31,7 +31,7 @@ namespace ArkSavePreviewer
             
 
             //First, load the Ark file.
-            ark = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk(@"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Saved\SavedArks\TheCenter.ark");
+            ark = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk(@"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Saved\SavedArksLocal\TheIsland.ark");
 
             //Write all classes to the sidebar.
             Search("");
