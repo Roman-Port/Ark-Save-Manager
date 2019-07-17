@@ -25,8 +25,7 @@ namespace ArkSaveEditor.ArkEntries
         public string classname;
         public string blueprintPath;
 
-        public string icon_url;
-        public string thumb_icon_url;
+        public ArkIcon icon;
 
         public Dictionary<DinoStatTypeIndex, float> baseLevel;
         public Dictionary<DinoStatTypeIndex, float> increasePerWildLevel;

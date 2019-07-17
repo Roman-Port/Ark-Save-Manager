@@ -163,14 +163,22 @@ namespace ArkSaveEditor.World
         public List<ArkTribeProfile> tribes = new List<ArkTribeProfile>();
         public List<ArkPlayer> playerCharacters = new List<ArkPlayer>();
 
+        //Settings
+        public ArkConfigSettings configSettings;
+
         /// <summary>
         /// Convert the map from a low-level object to a high-level object.
         /// </summary>
         /// <param name="savePath">The path to the folder housing the game data.</param>
         /// <param name="mapFileName">The name of the map file. For example, "Extinction" if you would like to load "Extinction.ark".</param>
         /// <param name="overrideMapData">Override the map data.</param>
-        public ArkWorld(string savePath, string mapFileName, ArkMapData overrideMapData = null)
+        public ArkWorld(string savePath, string mapFileName, string configPath, ArkMapData overrideMapData = null)
         {
+            //Read the config files
+            configSettings = new ArkConfigSettings();
+            configSettings.ReadFromFile(File.ReadAllLines(configPath + "Game.ini"));
+            configSettings.ReadFromFile(File.ReadAllLines(configPath + "GameUserSettings.ini"));
+
             //Open the .ark file now.
             string arkFileLocaton = Path.Combine(savePath, mapFileName + ".ark");
             var arkFile = ArkSaveEditor.Deserializer.ArkSaveDeserializer.OpenDotArk(arkFileLocaton);
