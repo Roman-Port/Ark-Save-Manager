@@ -6,8 +6,8 @@ namespace ArkSaveEditor.World
 {
     public class ArkImageAsset
     {
-        public string icon_url;
-        public string icon_url_thumb;
+        public string image_url;
+        public string image_url_thumb;
 
         public string id;
         public string id_thumb;

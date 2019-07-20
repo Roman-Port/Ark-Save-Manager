@@ -7,8 +7,8 @@ namespace ArkSaveEditor.ArkEntries
 {
     public class ArkItemEntry
     {
-        public ArkImageAsset icon;
-        public ArkImageAsset broken_icon;
+        public ArkIcon icon;
+        public ArkIcon broken_icon;
 
         public string classname;
         public string blueprintPath;
