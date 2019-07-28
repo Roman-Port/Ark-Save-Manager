@@ -157,6 +157,8 @@ namespace ArkSaveEditor.ArkEntries
         public float GlobalItemDecompositionTimeMultiplier {get; set;} = 1;
         public float GlobalSpoilingTimeMultiplier {get; set;} = 1;
 
+        public float TamedBaseHealthMultiplier { get; set; } = 1;
+
         public void ReadFromFile(string[] lines)
         {
             foreach(string s in lines)

@@ -172,7 +172,7 @@ namespace ArkSaveEditor.World
         /// <param name="savePath">The path to the folder housing the game data.</param>
         /// <param name="mapFileName">The name of the map file. For example, "Extinction" if you would like to load "Extinction.ark".</param>
         /// <param name="overrideMapData">Override the map data.</param>
-        public ArkWorld(string savePath, string mapFileName, string configPath, ArkMapData overrideMapData = null)
+        public ArkWorld(string savePath, string mapFileName, string configPath, ArkMapData overrideMapData = null, bool loadOnlyKnown = false)
         {
             //Read the config files
             configSettings = new ArkConfigSettings();
@@ -214,12 +214,14 @@ namespace ArkSaveEditor.World
             {
                 var g = sources[i];
                 string classname = g.classname.classname;
+                bool known = false;
 
                 //Check if this is a dinosaur by matching the classname.
                 if (Enum.TryParse<DinoClasses>(classname, out DinoClasses dinoClass))
                 {
                     //This is a dinosaur.
                     dinos.Add(new ArkDinosaur(this, this.sources[i]));
+                    known = true;
                 }
 
                 //Check if this is a player
@@ -227,6 +229,7 @@ namespace ArkSaveEditor.World
                 {
                     //This is a player.
                     playerCharacters.Add(new ArkPlayer(this, this.sources[i]));
+                    known = true;
                 }
 
                 //Check if this is a structure
@@ -235,6 +238,7 @@ namespace ArkSaveEditor.World
                 {
                     //This is a structure.
                     structures.Add(new ArkStructure(this, this.sources[i], metadata));
+                    known = true;
                 }
             }
 

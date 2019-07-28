@@ -1,4 +1,5 @@
 ﻿using ArkSaveEditor.World;
+using ArkSaveEditor.World.WorldTypes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,6 +33,22 @@ namespace ArkSaveEditor.ArkEntries
         public Dictionary<DinoStatTypeIndex, float> increasePerTamedLevel;
         public Dictionary<DinoStatTypeIndex, float> additiveTamingBonus; //Taming effectiveness
         public Dictionary<DinoStatTypeIndex, float> multiplicativeTamingBonus; //Taming effectiveness
+
+
+        /// <summary>
+        /// Very, very similar to the ARKBreedingStats stat. Used for interchangability https://github.com/cadon/ARKStatsExtractor/blob/dev/ARKBreedingStats/species/CreatureStat.cs
+        /// </summary>
+        public Dictionary<DinoStatTypeIndex, ArkBreedingStat> GetBreedingStats(ArkConfigSettings conf)
+        {
+            Dictionary<DinoStatTypeIndex, ArkBreedingStat> s = new Dictionary<DinoStatTypeIndex, ArkBreedingStat>();
+            for(int i = 0; i<11; i+=1)
+            {
+                DinoStatTypeIndex index = (DinoStatTypeIndex)i;
+                ArkBreedingStat stat = ArkBreedingStat.Compute(this, index, conf);
+                s.Add(index, stat);
+            }
+            return s;
+        }
     }
 
     public class ArkDinoEntryStatusComponent
@@ -40,6 +57,7 @@ namespace ArkSaveEditor.ArkEntries
         public float babyDinoConsumingFoodRateMultiplier { get; set; }
         public float extraBabyDinoConsumingFoodRateMultiplier { get; set; }
         public float foodConsumptionMultiplier { get; set; }
+        public float tamedBaseHealthMultiplier { get; set; }
     }
 
     public class ArkDinoFood

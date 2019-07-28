@@ -142,15 +142,15 @@ namespace ArkSaveEditor.World.WorldTypes
 
             return new ArkDinosaurStats
             {
-                health = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Health, baseLevelupsApplied.health, tamingEffectiveness, tamedLevelupsApplied.health, imprintingBonus, settings),
-                stamina = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Stamina, baseLevelupsApplied.stamina, tamingEffectiveness, tamedLevelupsApplied.stamina, imprintingBonus, settings),
-                unknown1 = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Torpidity, baseLevelupsApplied.unknown1, tamingEffectiveness, tamedLevelupsApplied.unknown1, imprintingBonus, settings),
-                oxygen = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Oxygen, baseLevelupsApplied.oxygen, tamingEffectiveness, tamedLevelupsApplied.oxygen, imprintingBonus, settings),
-                food = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Food, baseLevelupsApplied.food, tamingEffectiveness, tamedLevelupsApplied.food, imprintingBonus, settings),
-                water = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Water, baseLevelupsApplied.water, tamingEffectiveness, tamedLevelupsApplied.water, imprintingBonus, settings),
-                inventoryWeight = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Weight, baseLevelupsApplied.inventoryWeight, tamingEffectiveness, tamedLevelupsApplied.inventoryWeight, imprintingBonus, settings),
-                meleeDamageMult = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.MeleeDamage, baseLevelupsApplied.meleeDamageMult, tamingEffectiveness, tamedLevelupsApplied.meleeDamageMult, imprintingBonus, settings),
-                movementSpeedMult = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Speed, baseLevelupsApplied.movementSpeedMult, tamingEffectiveness, tamedLevelupsApplied.movementSpeedMult, imprintingBonus, settings),
+                health = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Health, baseLevelupsApplied.health, tamingEffectiveness, tamedLevelupsApplied.health, imprintingBonus, settings, world.configSettings, isTamed),
+                stamina = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Stamina, baseLevelupsApplied.stamina, tamingEffectiveness, tamedLevelupsApplied.stamina, imprintingBonus, settings, world.configSettings, isTamed),
+                unknown1 = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Torpidity, baseLevelupsApplied.unknown1, tamingEffectiveness, tamedLevelupsApplied.unknown1, imprintingBonus, settings, world.configSettings, isTamed),
+                oxygen = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Oxygen, baseLevelupsApplied.oxygen, tamingEffectiveness, tamedLevelupsApplied.oxygen, imprintingBonus, settings, world.configSettings, isTamed),
+                food = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Food, baseLevelupsApplied.food, tamingEffectiveness, tamedLevelupsApplied.food, imprintingBonus, settings, world.configSettings, isTamed),
+                water = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Water, baseLevelupsApplied.water, tamingEffectiveness, tamedLevelupsApplied.water, imprintingBonus, settings, world.configSettings, isTamed),
+                inventoryWeight = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Weight, baseLevelupsApplied.inventoryWeight, tamingEffectiveness, tamedLevelupsApplied.inventoryWeight, imprintingBonus, settings, world.configSettings, isTamed),
+                meleeDamageMult = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.MeleeDamage, baseLevelupsApplied.meleeDamageMult, tamingEffectiveness, tamedLevelupsApplied.meleeDamageMult, imprintingBonus, settings, world.configSettings, isTamed),
+                movementSpeedMult = (float)ArkStatsCalculator.CalculateStat(d, DinoStatTypeIndex.Speed, baseLevelupsApplied.movementSpeedMult, tamingEffectiveness, tamedLevelupsApplied.movementSpeedMult, imprintingBonus, settings, world.configSettings, isTamed),
             };
         }
 
