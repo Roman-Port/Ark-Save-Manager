@@ -187,15 +187,22 @@ namespace ArkSaveEditor.World
             string[] saveFilePaths = Directory.GetFiles(savePath);
             foreach(string profilePathname in saveFilePaths)
             {
-                if (profilePathname.ToLower().EndsWith(".arkprofile"))
+                try
                 {
-                    //This is an ARK profile. Open it.
-                    players.Add(ArkPlayerProfile.ReadFromFile(profilePathname));
-                }
-                if (profilePathname.ToLower().EndsWith(".arktribe"))
+                    if (profilePathname.ToLower().EndsWith(".arkprofile"))
+                    {
+                        //This is an ARK profile. Open it.
+                        players.Add(ArkPlayerProfile.ReadFromFile(profilePathname));
+                    }
+                    if (profilePathname.ToLower().EndsWith(".arktribe"))
+                    {
+                        //This is an ARK tribe. Open it.
+                        tribes.Add(new ArkTribeProfile(profilePathname, this));
+                    }
+                } catch (Exception ex)
                 {
-                    //This is an ARK tribe. Open it.
-                    tribes.Add(new ArkTribeProfile(profilePathname, this));
+                    Console.WriteLine($"Failed to load an Ark tribe or player at {profilePathname.Substring(savePath.Length)}. It will be skipped. This could result in errors!");
+                    Console.WriteLine($"Error debug data: {ex.Message} - {ex.StackTrace}");
                 }
             }
 
