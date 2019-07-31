@@ -7,34 +7,18 @@ namespace ArkSaveEditor.ArkEntries
     public class StructureDisplayMetadata
     {
         public string[] names;
-        public string img;
+        public string img; //Top down view
+        public string img_thumbnail; //45 degree view
         public StructureDisplayMetadata_DisplayType displayType;
-        public float pixelsPerMeter;
-        public StructureDisplayMetadata_Priority priority;
-        public StructureDisplayMetadata_Type type;
+        public float captureSize; //Ortho capture size, in game meters
+        public int capturePixels; //The size, in pixels, of the source image
+        public float rotationOffset; //Offset to apply to the rotation
     }
 
     public enum StructureDisplayMetadata_DisplayType
     {
-        Standard = 0
-    }
+        Standard = 0, //Shows this at the level according to the Z-axis
+        AlwaysTop = 1, //Always shows this on top of other structures
 
-    public enum StructureDisplayMetadata_Type
-    {
-        SquareCeiling = 0,
-        TriCeiling = 1,
-        SquareFoundation = 2,
-        TriFoundation = 3,
-        Ramp = 4,
-        Wall = 5
-    }
-
-    public enum StructureDisplayMetadata_Priority
-    {
-        Ramp = 10,
-        Ceiling = 9,
-
-        Wall = 3,
-        Foundation = 1
     }
 }

@@ -6,13 +6,8 @@ using System.Text;
 
 namespace ArkSaveEditor.World.WorldTypes
 {
-    public class ArkStructure : HighLevelArkGameObjectRef
+    public class ArkStructure : ArkCharacter
     {
-        /// <summary>
-        /// The tribe this structure belongs to
-        /// </summary>
-        public int tribeId;
-
         /// <summary>
         /// Has an inventory or not
         /// </summary>
@@ -46,6 +41,7 @@ namespace ArkSaveEditor.World.WorldTypes
         public ArkStructure(ArkWorld world, DotArkGameObject orig, StructureDisplayMetadata displayMetadata) : base(world, orig)
         {
             tribeId = GetInt32Property("TargetingTeam");
+            isInTribe = true;
             hasInventory = HasProperty("MyInventoryComponent");
             this.displayMetadata = displayMetadata;
 

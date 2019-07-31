@@ -22,7 +22,7 @@ namespace ArkSaveEditor.World.WorldTypes
         public bool isInTribe;
 
         /// <summary>
-        /// Get the items in this dino's inventory.
+        /// Get the items in this characters's inventory.
         /// </summary>
         public ArkInventory GetInventory()
         {
@@ -32,6 +32,14 @@ namespace ArkSaveEditor.World.WorldTypes
 
             //Get
             return ArkInventory.LoadFromReference(world, (ObjectProperty)GetPropertiesByName("MyInventoryComponent")[0]);
+        }
+
+        /// <summary>
+        /// Checks if we have an inventory
+        /// </summary>
+        public bool HasInventory()
+        {
+            return HasProperty("MyInventoryComponent");
         }
 
         public ArkCharacter(ArkWorld world, DotArkGameObject orig) : base(world, orig)
