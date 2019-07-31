@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ArkSaveEditor.World.WorldTypes
 {
-    public class ArkDinosaur : HighLevelArkGameObjectRef
+    public class ArkDinosaur : ArkCharacter
     {
         /// <summary>
         /// If this is false, mo values for this dinosaur will be read.
@@ -78,11 +78,6 @@ namespace ArkSaveEditor.World.WorldTypes
         public string tamerName;
 
         /// <summary>
-        /// The ID of the tamed tribe
-        /// </summary>
-        public int tribeId;
-
-        /// <summary>
         /// The number of levelups applied after spawn time. Does not include base levels.
         /// </summary>
         public ArkDinosaurStats tamedLevelupsApplied;
@@ -97,34 +92,6 @@ namespace ArkSaveEditor.World.WorldTypes
         public bool isBaby;
         public double nextImprintTime;
         public float imprintQuality;
-
-        /// <summary>
-        /// Get the items in this dino's inventory.
-        /// </summary>
-        public List<ArkPrimalItem> GetInventoryItems(bool includeEngrams = false)
-        {
-            //If we don't have an inventory compnent, return empty list
-            if (!HasProperty("MyInventoryComponent"))
-                return new List<ArkPrimalItem>();
-
-            //Get the inventory component from our props. This is ref
-            var inventoryComponent = ((ObjectProperty)GetPropertiesByName("MyInventoryComponent")[0]).gameObjectRef;
-
-            //Get the items
-            if (!inventoryComponent.PropExistsName("InventoryItems"))
-                return new List<ArkPrimalItem>();
-            var inventoryItems = ((ArrayProperty<ObjectProperty>)inventoryComponent.GetPropsByName("InventoryItems")[0]).items;
-
-            //Get the referenced items
-            List<ArkPrimalItem> stacks = new List<ArkPrimalItem>();
-            foreach (var o in inventoryItems)
-            {
-                ArkPrimalItem item = new ArkPrimalItem(world, o.gameObjectRef);
-                if (includeEngrams || !item.isEngram)
-                    stacks.Add(item);
-            }
-            return stacks;
-        }
 
         /// <summary>
         /// Calculates the max stats for a dinosaur. REQUIRES YOU TO RUN ArkSaveEditor.ArkImports.ImportContent() BEFORE THIS!
@@ -191,6 +158,7 @@ namespace ArkSaveEditor.World.WorldTypes
                 baseLevel = statusComponent.GetInt32Property("BaseCharacterLevel");
             level = baseLevel;
             //Now, convert attributes that only exist on tamed dinosaurs.
+            isInTribe = isTamed;
             if (isTamed)
             {
                 tamedName = GetStringProperty("TamedName");

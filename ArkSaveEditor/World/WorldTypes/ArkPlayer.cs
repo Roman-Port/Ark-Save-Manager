@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ArkSaveEditor.World.WorldTypes
 {
-    public class ArkPlayer : HighLevelArkGameObjectRef
+    public class ArkPlayer : ArkCharacter
     {
         /// <summary>
         /// The name of the player, shown in game
@@ -30,19 +30,9 @@ namespace ArkSaveEditor.World.WorldTypes
         public string tribeName;
 
         /// <summary>
-        /// ID of the tribe
-        /// </summary>
-        public int tribeId;
-
-        /// <summary>
         /// The ID of this player on ARK
         /// </summary>
         public ulong arkId;
-
-        /// <summary>
-        /// Is in a tribe
-        /// </summary>
-        public bool isInTribe;
 
         /// <summary>
         /// Is this player living?
@@ -88,34 +78,6 @@ namespace ArkSaveEditor.World.WorldTypes
             {
                 isAlive = false;
             }
-        }
-
-        /// <summary>
-        /// Get the items in this player's inventory.
-        /// </summary>
-        public List<ArkPrimalItem> GetInventoryItems(bool includeEngrams = false)
-        {
-            //If we don't have an inventory compnent, return empty list
-            if (!HasProperty("MyInventoryComponent"))
-                return new List<ArkPrimalItem>();
-
-            //Get the inventory component from our props. This is ref
-            var inventoryComponent = ((ObjectProperty)GetPropertiesByName("MyInventoryComponent")[0]).gameObjectRef;
-
-            //Get the items
-            if (!inventoryComponent.PropExistsName("InventoryItems"))
-                return new List<ArkPrimalItem>();
-            var inventoryItems = ((ArrayProperty<ObjectProperty>)inventoryComponent.GetPropsByName("InventoryItems")[0]).items;
-
-            //Get the referenced items
-            List<ArkPrimalItem> stacks = new List<ArkPrimalItem>();
-            foreach (var o in inventoryItems)
-            {
-                ArkPrimalItem item = new ArkPrimalItem(world, o.gameObjectRef);
-                if (includeEngrams || !item.isEngram)
-                    stacks.Add(item);
-            }
-            return stacks;
         }
 
         /// <summary>
