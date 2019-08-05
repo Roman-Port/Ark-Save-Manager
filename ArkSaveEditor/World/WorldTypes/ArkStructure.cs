@@ -55,5 +55,10 @@ namespace ArkSaveEditor.World.WorldTypes
                 maxHealth = GetFloatProperty("MaxHealth");
 
         }
+
+        public ArkStructure()
+        {
+
+        }
     }
 }

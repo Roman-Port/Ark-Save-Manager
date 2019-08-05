@@ -39,10 +39,12 @@
   },
   "libraries": {
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "NxGSwjQkajBR9BjV88yjO1q3strpsC7qsaaK7Omyg9WKsM2+zNe35dr8GJT+Lj793PdvVW++1zy9BeGDTJ3uoQ==",
+      "sha512": "a/iSwnRZb+LHFk49hQOyThh/ZNC3vsbZsF65XwQIb863qF6msmhdQtxGXFL28Ob2NsCz/drEj28BJd/YPpLRBg==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -179,10 +181,12 @@
       ]
     },
     "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+      "sha512": "znZGbws7E4BA9jxNZ7FuiIRI3C9hrgatVQSTKhIYZYNOud4M5VfGlTYi6RdYO5sQrebFuF/g9UEV3hOxDMXF6Q==",
       "type": "package",
       "path": "newtonsoft.json/11.0.2",
       "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.md",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -220,11 +224,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Roman\\source\\repos\\ArkSaveEditor\\ArkSaveEditor\\ArkSaveEditor.csproj",
+      "projectUniqueName": "E:\\Users\\Roman\\source\\repos\\ArkSaveEditor\\ArkSaveEditor\\ArkSaveEditor.csproj",
       "projectName": "ArkSaveEditor",
-      "projectPath": "C:\\Users\\Roman\\source\\repos\\ArkSaveEditor\\ArkSaveEditor\\ArkSaveEditor.csproj",
+      "projectPath": "E:\\Users\\Roman\\source\\repos\\ArkSaveEditor\\ArkSaveEditor\\ArkSaveEditor.csproj",
       "packagesPath": "C:\\Users\\Roman\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Roman\\source\\repos\\ArkSaveEditor\\ArkSaveEditor\\obj\\",
+      "outputPath": "E:\\Users\\Roman\\source\\repos\\ArkSaveEditor\\ArkSaveEditor\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

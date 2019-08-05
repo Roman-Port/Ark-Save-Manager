@@ -9,3 +9,14 @@ C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcor
 C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.pdb
 C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.dll
 C:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.pdb
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.deps.json
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.runtimeconfig.json
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.runtimeconfig.dev.json
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.dll
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\bin\Debug\netcoreapp2.1\ClassDefAutogenerator.pdb
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.csprojAssemblyReference.cache
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.csproj.CoreCompileInputs.cache
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.AssemblyInfoInputs.cache
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.AssemblyInfo.cs
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.dll
+E:\Users\Roman\source\repos\ArkSaveEditor\ClassDefAutogenerator\obj\Debug\netcoreapp2.1\ClassDefAutogenerator.pdb

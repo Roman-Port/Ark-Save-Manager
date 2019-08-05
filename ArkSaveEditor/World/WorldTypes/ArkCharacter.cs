@@ -46,5 +46,10 @@ namespace ArkSaveEditor.World.WorldTypes
         {
 
         }
+
+        public ArkCharacter()
+        {
+
+        }
     }
 }

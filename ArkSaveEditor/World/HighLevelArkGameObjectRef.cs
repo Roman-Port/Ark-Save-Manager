@@ -23,6 +23,18 @@ namespace ArkSaveEditor.World
         {
             this.source = source;
             this.world = world;
+
+            this.guid = source.guid;
+            this.classname = source.classname;
+            this.classnameString = source.classname.classname;
+            this.isItem = source.isItem;
+            this.altNames = source.names;
+            this.location = source.locationData;
+        }
+
+        public HighLevelArkGameObjectRef()
+        {
+
         }
 
         /// <summary>
@@ -35,6 +47,13 @@ namespace ArkSaveEditor.World
             DotArkGameObject source = world.sources[index];
             this.source = source;
             this.world = world;
+
+            this.guid = source.guid;
+            this.classname = source.classname;
+            this.classnameString = source.classname.classname;
+            this.isItem = source.isItem;
+            this.altNames = source.names;
+            this.location = source.locationData;
         }
 
         private DotArkGameObject source;
@@ -42,107 +61,38 @@ namespace ArkSaveEditor.World
         /// <summary>
         /// GUID for the object. Important to multiplayer. Don't change.
         /// </summary>
-        public Guid guid
-        {
-            get
-            {
-                return source.guid;
-            }
-            set
-            {
-                source.guid = value;
-            }
-        }
+        public Guid guid;
 
         /// <summary>
         /// The standard classname of this object.
         /// </summary>
-        public ArkClassName classname {
-            get
-            {
-                return source.classname;
-            }
-            set
-            {
-                source.classname = value;
-            }
-        }
+        public ArkClassName classname;
 
         /// <summary>
         /// A version of the classname in a standard string format.
         /// </summary>
-        public string classnameString
-        {
-            get
-            {
-                return classname.classname;
-            }
-            set
-            {
-                classname.classname = value;
-            }
-        }
+        public string classnameString;
 
         /// <summary>
         /// Returns true if this is an inventory item.
         /// </summary>
-        public bool isItem
-        {
-            get
-            {
-                return source.isItem;
-            }
-            set
-            {
-                source.isItem = value;
-            }
-        }
+        public bool isItem;
 
         /// <summary>
         /// Alternate names for this object.
         /// </summary>
-        public List<ArkClassName> altNames
-        {
-            get
-            {
-                return source.names;
-            }
-            set
-            {
-                source.names = value;
-            }
-        }
+        public List<ArkClassName> altNames;
 
         /// <summary>
         /// The location of this object. May be null.
         /// </summary>
-        public DotArkLocationData location
-        {
-            get
-            {
-                return source.locationData;
-            }
-            set
-            {
-                source.locationData = value;
-            }
-        }
+        public DotArkLocationData location;
 
         /// <summary>
         /// Raw access to the properties.
         /// </summary>
         [Newtonsoft.Json.JsonIgnoreAttribute]
-        public List<DotArkProperty> rawProperties
-        {
-            get
-            {
-                return source.props;
-            }
-            set
-            {
-                source.props = value;
-            }
-        }
+        public List<DotArkProperty> rawProperties;
 
         public DotArkProperty[] GetPropertiesByName(string name)
         {
